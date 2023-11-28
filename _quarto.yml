@@ -6,10 +6,10 @@ execute:
   echo: true
 
 book:
-  title: "China India Economy"
+  title: "Comparing Economic Growth of China and India"
   author:
     - Varsha Appaji (vla2116)
-    - Kevin Xu (UNI2)
+    - Kevin Xu (kxx2001)
   repo-url: https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git
   date: today
   page-footer:

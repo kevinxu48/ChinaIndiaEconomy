@@ -18,6 +18,13 @@
     "href": "data.html#description",
     "title": "2  Data",
     "section": "2.1 Description",
-    "text": "2.1 Description\nThe data we have chosen is from the World Bank ## Missing value analysis"
+    "text": "2.1 Description\nWe will examine many datasets available on the World Bank database that compare economic factors of many countries. https://data.worldbank.org/?locations=CN-IN According to the world bank website, these datasets were either gathered by the Bank’s country management units or obtained from official sources from the statistical system of the countries themselves and are updated monthly. One issue with the dataset is that it does not contain data regarding the housing market or education attainment in either country, so we will need to collect these from other sources.\nOne example in the World Bank database is a dataset that contains the unemployment rates for various countries:\nhttps://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?end=2022&locations=CN&name_desc=true&start=1991&view=chart\nWhen downloading the csv file, we see the data contains rows going from 1960 to 2022 and the columns represent the names of different countries including China and India. From this data we will subset the countries to only look at the China and India columns and we will create time series plots to compare the unemployment rate trends in the past 3 decades. We may need to pivot longer to get the years and countries into its own column and into tidydata format.\nMoreover, we gathered data describing housing prices in various countries:\nhttps://data.oecd.org/price/housing-prices.htm\nOne issue with this data is that the data from China only starts from 2010-2022 and the data from India only starts from 2009-2022, but we would like both of these to contain data from previous decades.\n\n2.1.1 Research Plan\nUsing these datasets, we will be able to compare factors that impact a nation’s economy to determine recent trends in China and India’s economy. Through visualizations comparing these factors faceted by the two countries, we can attempt to predict which country will have stronger economic growth in the future given recent and prior historical trends. First, we will"
+  },
+  {
+    "objectID": "data.html#missing-value-analysis",
+    "href": "data.html#missing-value-analysis",
+    "title": "2  Data",
+    "section": "2.2 Missing value analysis",
+    "text": "2.2 Missing value analysis\nThe unemployment data set contains missing values for the years\nlibrary(tidyr) chinaindia = unemployment[((unemployment\\(`Country Name` == 'China')| (unemployment\\)Country Name == ‘India’)) , ] L = pivot_longer(chinaindia,cols=‘1960’:‘2005’, names_to = “year”, values_to = “unemployment”) final = L[c(“Country Name”, “Indicator Name”, “year”, “unemployment”)]"
   }
 ]

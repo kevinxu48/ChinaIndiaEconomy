@@ -25,6 +25,6 @@
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
     "section": "2.2 Missing value analysis",
-    "text": "2.2 Missing value analysis\nThe unemployment data set contains missing values for the years\nlibrary(tidyr) chinaindia = unemployment[((unemployment\\(`Country Name` == 'China')| (unemployment\\)Country Name == ‘India’)) , ] L = pivot_longer(chinaindia,cols=‘1960’:‘2005’, names_to = “year”, values_to = “unemployment”) final = L[c(“Country Name”, “Indicator Name”, “year”, “unemployment”)]"
+    "text": "2.2 Missing value analysis\nTo view any missing data, we subsetted the data to only include China and India, and pivoting the data to include the years as one column. The unemployment data set contains missing values for the years 1960 through 1991. To fix this, we will simply remove the missing values because the 32 years is sufficient data for answering our research question."
   }
 ]

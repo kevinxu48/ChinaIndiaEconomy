@@ -1,46 +1,45 @@
 # Data
-(instructions for data; remove when done)
-2.1 Technical description
+
+(instructions for data; remove when done) 2.1 Technical description
 
 Identify one or more data sources (see II. D. above) that you propose to draw on for the project. For each, describe how the data are collected and by whom. Describe the format of the data, the frequency of updates, dimensions, and any other relevant information. Note any issues / problems with the data, either known or that you discover. Explain how you plan to import the data. Carefully document your sources with links to the precise data sources that you used. If that is not possible (for example if your data is not available online, then explain that clearly.)
 
 (suggested: 1 page)
 
-  2.2 Research plan
+2.2 Research plan
 
-Explain in detail how your data will enable you to answer your research questions from the introduction. 
+Explain in detail how your data will enable you to answer your research questions from the introduction.
 
 (suggested: 1 page)
 
- 2.3 Missing value analysis
+2.3 Missing value analysis
 
 Describe any patterns you discover in missing values. If no values are missing, graphs should still be included showing that.
 
 (suggested: 2 graphs plus commentary)
 
 ## Description
-We will examine many datasets available on the World Bank database that compare economic factors of many countries. https://data.worldbank.org/?locations=CN-IN
-According to the world bank website, these datasets were either gathered by the Bank's country management units or obtained from official sources from the statistical system of the countries themselves and are updated monthly. One issue with the dataset is that it does not contain data regarding the housing market or education attainment in either country, so we will need to collect these from other sources.
+
+We will examine many datasets available on the World Bank database that compare economic factors of many countries. https://data.worldbank.org/?locations=CN-IN According to the world bank website, these datasets were either gathered by the Bank's country management units or obtained from official sources from the statistical system of the countries themselves and are updated monthly. One issue with the dataset is that it does not contain data regarding the housing market or education attainment in either country, so we will need to collect these from other sources.
 
 One example in the World Bank database is a dataset that contains the unemployment rates for various countries:
 
-https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?end=2022&locations=CN&name_desc=true&start=1991&view=chart 
+https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?end=2022&locations=CN&name_desc=true&start=1991&view=chart
 
-When downloading the csv file, we see the data contains rows going from 1960 to 2022 and the columns represent the names of different countries including China and India. From this data we will subset the countries to only look at the China and India columns and we will create time series plots to compare the unemployment rate trends in the past 3 decades. We may need to pivot longer to get the years and countries into its own column and into tidydata format. 
+When downloading the csv file, we see the data contains rows going from 1960 to 2022 and the columns represent the names of different countries including China and India. From this data we will subset the countries to only look at the China and India columns and we will create time series plots to compare the unemployment rate trends in the past 3 decades. We may need to pivot longer to get the years and countries into its own column and into tidydata format.
 
-Moreover, we gathered data describing housing prices in various countries: 
+Moreover, we gathered data describing housing prices in various countries:
 
-https://data.oecd.org/price/housing-prices.htm 
+https://data.oecd.org/price/housing-prices.htm
 
-One issue with this data is that the data from China only starts from 2010-2022 and the data from India only starts from 2009-2022, but we would like both of these to contain data from previous decades. 
+One issue with this data is that the data from China only starts from 2010-2022 and the data from India only starts from 2009-2022, but we would like both of these to contain data from previous decades.
 
 ### Research Plan
-Using these datasets, we will be able to compare factors that impact a nation's economy to determine recent trends in China and India's economy. Through visualizations comparing these factors faceted by the two countries, we can attempt to predict which country will have stronger economic growth in the future given recent and prior historical trends. First, we will 
+
+Using these datasets, we will be able to compare factors that impact a nation's economy to determine recent trends in China and India's economy. Through visualizations comparing these factors faceted by the two countries, we can attempt to predict which country will have stronger economic growth in the future given recent and prior historical trends. First, we will
 
 ## Missing value analysis
-The unemployment data set contains missing values for the years 
-```{r}
-library(tidyr)
-chinaindia = unemployment[((unemployment$`Country Name` == 'China')| (unemployment$`Country Name` == 'India')) , ]
-L = pivot_longer(chinaindia,cols='1960':'2005', names_to = "year", values_to = "unemployment")
-final = L[c("Country Name", "Indicator Name", "year", "unemployment")]
+
+To view any missing data, we subsetted the data to only include China and India, and pivoting the data to include the years as one column. The unemployment data set contains missing values for the years 1960 through 1991. To fix this, we will simply remove the missing values because the 32 years is sufficient data for answering our research question.
+
+![](images/missingunemployment.jpg)

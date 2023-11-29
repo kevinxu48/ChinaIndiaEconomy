@@ -62,8 +62,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -197,8 +195,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</h2>
-<p>The unemployment data set contains missing values for the years</p>
-<p>library(tidyr) chinaindia = unemployment[((unemployment<span class="math inline">\(`Country Name` == 'China')| (unemployment\)</span><code>Country Name</code> == ‘India’)) , ] L = pivot_longer(chinaindia,cols=‘1960’:‘2005’, names_to = “year”, values_to = “unemployment”) final = L[c(“Country Name”, “Indicator Name”, “year”, “unemployment”)]</p>
+<p>To view any missing data, we subsetted the data to only include China and India, and pivoting the data to include the years as one column. The unemployment data set contains missing values for the years 1960 through 1991. To fix this, we will simply remove the missing values because the 32 years is sufficient data for answering our research question.</p>
+<p><img src="images/missingunemployment.jpg" class="img-fluid"></p>
 
 
 </section>

@@ -34,9 +34,7 @@ When downloading the csv file, we see like with the GDP data, the data contains 
 
 Moreover, we utilize the environmental data to answer the question of how vulnerable each country is to potential climate-related disaster through the ND-GAIN index. A higher ND-GAIN index indicates that the country has a higher capacity to adapt to the negative effects of climate change.
 
-Finally, for the housing prices index data, we will use higher values as an indicator of economic growth. In general, rising house prices encourages additional construction spending to maximize profit, leading to more robust economic growth. To
-access this dataset, we can download a csv from the website with a location, time period, and value column. This time, the data is already in tidy form, so we do not need to pivot longer. Again we will subset the data to examine China and India, and maybe other countries to use for comparisons. We can use a time series plot or dotplot to compare the real housing prices index for China and India as a criterion for which country has had a better growing housing market.
->>>>>>> 312896b9a9bc805d8902b65877402a332053b928
+Finally, for the housing prices index data, we will use higher values as an indicator of economic growth. In general, rising house prices encourages additional construction spending to maximize profit, leading to more robust economic growth. To access this dataset, we can download a csv from the website with a location, time period, and value column. This time, the data is already in tidy form, so we do not need to pivot longer. Again we will subset the data to examine China and India, and maybe other countries to use for comparisons. We can use a time series plot or dotplot to compare the real housing prices index for China and India as a criterion for which country has had a better growing housing market.
 
 ## Missing value analysis
 

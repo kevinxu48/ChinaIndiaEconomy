@@ -38,14 +38,99 @@ Finally, for the housing prices index data, we will use higher values as an indi
 
 ## Missing value analysis
 
-To view any missing data for the unemployment data, we subsetted the data to only include China and India, and pivoting the data to include the years as one column. We then use a heatmap to display the rows and columns containing missing values. From this, we see the unemployment data set contains missing values for the years 1960 through 1991. To fix this, we will simply remove the missing values because the 32 years is sufficient data for answering our research question. If necessary, we could also supplement the missing data with information from a different source, but it is difficult to determine if the data will be accurate if the World Bank does not have access to the information.
+To view any missing data for the unemployment data, we subsetted the data to only include China and India, and pivoting the data to include the years as one column. When loading the data in from the csv files, we noticed that the years were in the form: "X1960", instead of "1960". To fix this we . We then use a heatmap to display the rows and columns containing missing values. From this, we see the unemployment data set contains missing values for the years 1960 through 1991. To fix this, we will simply remove the missing values because the 32 years is sufficient data for answering our research question. If necessary, we could also supplement the missing data with information from a different source, but it is difficult to determine if the data will be accurate if the World Bank does not have access to the information.
 
-![](images/missingunemployment.jpg)
+```{r}
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(scales)
+
+unemployment = read.csv("unemployment.csv")
+chinaindia = unemployment[((unemployment$`Country.Name` == 'China')| (unemployment$`Country.Name` == 'India')) , ]
+L = pivot_longer(chinaindia,cols='X1960':'X2022', names_to = "year", values_to = "unemployment")
+L$year<-gsub("X","",as.character(L$year))
+#L$year <- as.integer(L$year)
+
+final = L[c("Country.Name", "Indicator.Name", "year", "unemployment")]
+final = final %>% rename(Country = `Country.Name`)
+```
+
+```{r,fig.width=10}
+ggplot(final, aes(year,Country, fill = unemployment)) +
+  geom_tile(color = "Black") +
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("Grey Represents Missing Values")+
+  scale_fill_continuous(low = "yellow", high = "firebrick3")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
 
 Similarly, for the GDP growth for both countries, we see that this time we have much more data from previous decades up until 1960. Since this value is missing for both China and India, we can again remove this missing value because not know this value is not that important because we have so much other data past 1960. Thus, we can see that the only missing values in any of these datasets will be where the countries have no data for a certain period of time. Since we will have data from different periods of time for different metrics that determnine economic growth, instead of looking at time periods that contain no missing data, we will instead use all the available data because both countries contain nonmissing data for the same years, which allows for easy comparisons.
 
-![](images/missinggdp.jpg)
+```{r}
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+
+gain = read.csv("gain.csv")
+
+chinaindiaclimate = gain[((gain$Name == 'China')| (gain$Name == 'India')) , ]
+ciclonger = pivot_longer(chinaindiaclimate,cols='X1995':'X2021', names_to = "year", values_to = "NDGain_index")
+ciclonger$year<-gsub("X","",as.character(ciclonger$year))
+ciclonger$year <- as.integer(ciclonger$year)
+
+finalcic = ciclonger[c("Name", "year", "NDGain_index")]
+finalcic = finalcic %>% rename(Country = Name)
+```
+
+```{r,fig.width=10}
+ggplot(finalcic, aes(year,Country, fill = NDGain_index)) +
+  geom_tile(color = "Black") +
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("No Missing Values in NDGain Data")+
+  scale_fill_continuous(low = "#FFFFED", high = "#228B22")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
 
 Now we will look at the environmental dataset that is not obtained from the World Bank website. To view any missing values, again we subset the data to include only China and India, then pivot longer. We see after displaying the row and column values in a heatmap that there are no missing values in this dataset. However, we only have data starting from 1995, which is still a good amount of time to observe the trend in each country.
+
+```{r}
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+
+GDP = read.csv("GDP.csv")
+chinaindia = GDP[((GDP$`Country.Name` == 'China')| (GDP$`Country.Name` == 'India')) , ]
+L = pivot_longer(chinaindia,cols='X1960':'X2022', names_to = "year", values_to = "GDP Growth %")
+
+L$year<-gsub("X","",as.character(L$year))
+#L$year <- as.integer(L$year)
+
+final = L[c("Country.Name", "Indicator.Name", "year", "GDP Growth %")]
+final = final %>% rename(Country = `Country.Name`)
+
+
+```
+
+```{r,fig.width=10}
+
+ggplot(final, aes(year,Country, fill = `GDP Growth %`)) +
+  geom_tile(color = "Black") +
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("1960 Row is missing value")+ 
+  scale_fill_gradient2(
+    low = muted("red"),
+    mid = "white",
+    high = muted("green"),
+    midpoint = 0
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+```
 
 ![](images/missingndgain-01.jpg)

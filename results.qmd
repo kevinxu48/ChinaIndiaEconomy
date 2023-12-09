@@ -1,1 +1,48 @@
 # Results
+
+### Temporary Headings. Replace with something meaningful that summarizes the plots we create
+## How have China and India's growth stories differed?
+```{r}
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(dplyr)
+
+GDP_values = read.csv("GDP_values.csv")
+GDP_vals = GDP_values[((GDP_values$`Country.Name` == 'China')| (GDP_values$`Country.Name` == 'India')) , ]
+L = pivot_longer(GDP_vals,cols='X1960':'X2022', names_to = "year", values_to = "GDP per Cap")
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+
+GDP_vals = L[c("Country.Name", "Indicator.Name", "year", "GDP per Cap")]
+GDP_vals = GDP_vals %>% rename(Country = `Country.Name`)
+
+GDP_growth = read.csv("GDP.csv")
+GDP_growth = GDP_growth[((GDP_growth$`Country.Name` == 'China')| (GDP_growth$`Country.Name` == 'India')) , ]
+L = pivot_longer(GDP_growth,cols='X1960':'X2022', names_to = "year", values_to = "GDP Growth %")
+
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+GDP_growth = L[c("Country.Name", "Indicator.Name", "year", "GDP Growth %")]
+GDP_growth = GDP_growth %>% rename(Country = "Country.Name")
+```
+
+```{r,fig.width=15}
+ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
+  geom_point(color = "Black") +
+  facet_wrap(Country~.)+
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("Both Countries have Significant GDP Growth since 1960")+ 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+### What is the reasoning for these differences?
+
+## How do their historical trends set them up for the future?
+
+
+## How do Climate-related Challenges Impact Economy?
+    Maybe do a mosaic plot

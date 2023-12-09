@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -138,7 +172,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" id="toc-temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" class="nav-link active" data-scroll-target="#temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create"><span class="header-section-number">3.0.1</span> Temporary Headings. Replace with something meaningful that summarizes the plots we create</a></li>
+  <li><a href="#how-have-china-and-indias-growth-stories-differed" id="toc-how-have-china-and-indias-growth-stories-differed" class="nav-link" data-scroll-target="#how-have-china-and-indias-growth-stories-differed"><span class="header-section-number">3.1</span> How have China and India’s growth stories differed?</a>
+  <ul class="collapse">
+  <li><a href="#what-is-the-reasoning-for-these-differences" id="toc-what-is-the-reasoning-for-these-differences" class="nav-link" data-scroll-target="#what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.1</span> What is the reasoning for these differences?</a></li>
+  </ul></li>
+  <li><a href="#how-do-their-historical-trends-set-them-up-for-the-future" id="toc-how-do-their-historical-trends-set-them-up-for-the-future" class="nav-link" data-scroll-target="#how-do-their-historical-trends-set-them-up-for-the-future"><span class="header-section-number">3.2</span> How do their historical trends set them up for the future?</a></li>
+  <li><a href="#how-do-climate-related-challenges-impact-economy" id="toc-how-do-climate-related-challenges-impact-economy" class="nav-link" data-scroll-target="#how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.3</span> How do Climate-related Challenges Impact Economy?</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -160,8 +206,112 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1" class="anchored" data-anchor-id="temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create"><span class="header-section-number">3.0.1</span> Temporary Headings. Replace with something meaningful that summarizes the plots we create</h3>
+</section>
+<section id="how-have-china-and-indias-growth-stories-differed" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="how-have-china-and-indias-growth-stories-differed"><span class="header-section-number">3.1</span> How have China and India’s growth stories differed?</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ purrr     1.0.1
+✔ forcats   1.0.0     ✔ readr     2.1.4
+✔ ggplot2   3.4.1     ✔ stringr   1.5.1
+✔ lubridate 1.9.2     ✔ tibble    3.2.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'scales'
+
+The following object is masked from 'package:purrr':
+
+    discard
+
+The following object is masked from 'package:readr':
+
+    col_factor</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>GDP_values <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP_values.csv"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_values[((GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_vals,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP per Cap"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP per Cap"</span>)]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_vals <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP.csv"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth[((GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_growth,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP Growth %"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP Growth %"</span>)]</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_vals, <span class="fu">aes</span>(year,<span class="st">`</span><span class="at">GDP per Cap</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.)<span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Both Countries have Significant GDP Growth since 1960"</span>)<span class="sc">+</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1440"></p>
+</div>
+</div>
+<section id="what-is-the-reasoning-for-these-differences" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.1</span> What is the reasoning for these differences?</h3>
+</section>
+</section>
+<section id="how-do-their-historical-trends-set-them-up-for-the-future" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="how-do-their-historical-trends-set-them-up-for-the-future"><span class="header-section-number">3.2</span> How do their historical trends set them up for the future?</h2>
+</section>
+<section id="how-do-climate-related-challenges-impact-economy" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.3</span> How do Climate-related Challenges Impact Economy?</h2>
+<pre><code>Maybe do a mosaic plot</code></pre>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -417,7 +567,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

@@ -10,7 +10,7 @@ library(scales)
 library(dplyr)
 
 GDP_values = read.csv("GDP_values.csv")
-GDP_vals = GDP_values[((GDP_values$`Country.Name` == 'China')| (GDP_values$`Country.Name` == 'India')) , ]
+GDP_vals = GDP_values[((GDP_values$`Country.Name` == 'China')| (GDP_values$`Country.Name` == 'India')), ]
 L = pivot_longer(GDP_vals,cols='X1960':'X2022', names_to = "year", values_to = "GDP per Cap")
 L$year<-gsub("X","",as.character(L$year))
 L$year <- as.integer(L$year)
@@ -20,8 +20,8 @@ GDP_vals = L[c("Country.Name", "Indicator.Name", "year", "GDP per Cap")]
 GDP_vals = GDP_vals %>% rename(Country = `Country.Name`)
 
 GDP_growth = read.csv("GDP.csv")
-GDP_growth = GDP_growth[((GDP_growth$`Country.Name` == 'China')| (GDP_growth$`Country.Name` == 'India')) , ]
-L = pivot_longer(GDP_growth,cols='X1960':'X2022', names_to = "year", values_to = "GDP Growth %")
+GDP_growth = GDP_growth[((GDP_growth$`Country.Name` == 'China')| (GDP_growth$`Country.Name` == 'India')) |  (GDP_growth$`Country.Name` == 'United States'), ]
+L = pivot_longer(GDP_growth,cols='X1961':'X2022', names_to = "year", values_to = "GDP Growth %")
 
 L$year<-gsub("X","",as.character(L$year))
 L$year <- as.integer(L$year)
@@ -33,11 +33,32 @@ GDP_growth = GDP_growth %>% rename(Country = "Country.Name")
 ```{r,fig.width=15}
 ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
   geom_point(color = "Black") +
+  stat_smooth(method = "loess", se = FALSE, span = 0.5)+
   facet_wrap(Country~.)+
+  ylab("GDP Per Capita (US$)")+
+  xlab("Year")+ 
   theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
-  ggtitle("Both Countries have Significant GDP Growth since 1960")+ 
+  ggtitle("Historically China has Significantly Higher GDP Per Capita")+ 
   theme(plot.title = element_text(hjust = 0.5))
 ```
+Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so . From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China's has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's.
+
+
+```{r,fig.width=15}
+ggplot(GDP_growth, aes(year,Country, fill = `GDP Growth %`)) +
+  geom_tile(color = "Black") +
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("China's GDP has Generally Grown Faster than India's since 1960")+ 
+  scale_fill_gradient2(
+    low = muted("orange"),
+    mid = "white",
+    high = muted("green"),
+    midpoint = 0
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+We use the United States' GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country.
+
 
 ### What is the reasoning for these differences?
 

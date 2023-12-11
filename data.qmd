@@ -28,7 +28,7 @@ Another example in the World Bank database mentioned above is a dataset that con
 
 https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?end=2022&locations=CN&name_desc=true&start=1991&view=chart
 
-This dataset will help explore one of the metrics, unemployment, that will help answer the question of how the two countries' growths have differed. We will use this to create a time serires plot comparing the unemployment rates of China and India from the year 1991 onward. By viewing the unemployment trend, we can determine whether China or India's unemployment rate is on a downward trajectory, which is a good indication of a flourishing economy. Likewise, if unemployment rate has an upwards trajectory then this would be an indication of a declining economy.
+This dataset will help explore one of the metrics, unemployment, that will help answer the question of how the two countries' growths have differed. We will use this to create a time series plot comparing the unemployment rates of China and India from the year 1991 onward. By viewing the unemployment trend, we can determine whether China or India's unemployment rate is on a downward trajectory, which is a good indication of a flourishing economy. Likewise, if unemployment rate has an upwards trajectory then this would be an indication of a declining economy.
 
 When downloading the csv file, we see like with the GDP data, the data contains rows going from 1960 to 2022 and the columns represent the names of different countries including China and India. From this data we will subset the countries to only look at the China and India columns and we will create time series plots to compare the unemployment rate trends in the past 3 decades.
 

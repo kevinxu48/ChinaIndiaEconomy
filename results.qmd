@@ -64,7 +64,38 @@ We use the United States' GDP growth as a benchmark for comparison because it is
 ### What is the reasoning for these differences?
 Parallel coordinates
 
+2 way bar chart with exports going one direction and imports going the other direction
 
+```{r}
+exports = read.csv("exports.csv")
+imports = read.csv("imports.csv")
+
+exports = exports[((exports$`Country.Name` == 'China')| (exports$`Country.Name` == 'India')), ]
+L = pivot_longer(exports,cols='X1961':'X2022', names_to = "year", values_to = "Exports")
+
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+exports = L[c("Country.Name", "Indicator.Name", "year", "Exports")]
+exports = exports %>% rename(Country = "Country.Name")
+
+imports = imports[((imports$`Country.Name` == 'China')| (imports$`Country.Name` == 'India')), ]
+L = pivot_longer(imports,cols='X1961':'X2022', names_to = "year", values_to = "Imports")
+
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+imports = L[c("Country.Name", "Indicator.Name", "year", "Imports")]
+imports = imports %>% rename(Country = "Country.Name")
+
+importexports = merge(exports,imports,by=c("Country","year"))
+```
+
+```{r}
+
+
+#ggplot(importexports,aes(x=imports,y=exports,fill=Group))+geom_bar(stat="identity")+coord_flip()
+```
 ## How do their historical trends set them up for the future?
 
 
@@ -72,5 +103,4 @@ Parallel coordinates
     Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita
     
     
-    We obtained the data from worldbank data
-    Interactive plot:
+Bar chart with imports going i

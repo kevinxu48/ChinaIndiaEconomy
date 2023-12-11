@@ -305,21 +305,22 @@ The following object is masked from 'package:readr':
 <p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
-<p>Gross domestic product (GDP) per capita is a metric that describes a country’s economic output per person, so . From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China’s has skyrocketed compared to India’s. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India’s GDP per Capita to surpass China’s.</p>
+<p>Gross domestic product (GDP) per capita is a metric that describes a country’s economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China’s has skyrocketed compared to India’s. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India’s GDP per Capita to surpass China’s.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_growth, <span class="fu">aes</span>(year,Country, <span class="at">fill =</span> <span class="st">`</span><span class="at">GDP Growth %</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China's GDP has Generally Grown Faster than India's since 1960"</span>)<span class="sc">+</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">muted</span>(<span class="st">"orange"</span>),</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="fu">muted</span>(<span class="st">"green"</span>),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">0</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China's GDP has Generally Grown Faster than India's since 1960"</span>)<span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">muted</span>(<span class="st">"orange"</span>),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="fu">muted</span>(<span class="st">"green"</span>),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">0</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1440"></p>
@@ -328,6 +329,7 @@ The following object is masked from 'package:readr':
 <p>We use the United States’ GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country.</p>
 <section id="what-is-the-reasoning-for-these-differences" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.1</span> What is the reasoning for these differences?</h3>
+<p>Parallel coordinates</p>
 </section>
 </section>
 <section id="how-do-their-historical-trends-set-them-up-for-the-future" class="level2" data-number="3.2">
@@ -335,7 +337,11 @@ The following object is masked from 'package:readr':
 </section>
 <section id="how-do-climate-related-challenges-impact-economy" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.3</span> How do Climate-related Challenges Impact Economy?</h2>
-<pre><code>Maybe do a mosaic plot</code></pre>
+<pre><code>Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita
+
+
+We obtained the data from worldbank data
+Interactive plot:</code></pre>
 
 
 </section>

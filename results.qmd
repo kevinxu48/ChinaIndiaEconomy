@@ -41,12 +41,13 @@ ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
   ggtitle("Historically China has Significantly Higher GDP Per Capita")+ 
   theme(plot.title = element_text(hjust = 0.5))
 ```
-Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so . From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China's has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's.
+Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China's has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's.
 
 
 ```{r,fig.width=15}
 ggplot(GDP_growth, aes(year,Country, fill = `GDP Growth %`)) +
   geom_tile(color = "Black") +
+   theme_minimal() +
   theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
   ggtitle("China's GDP has Generally Grown Faster than India's since 1960")+ 
   scale_fill_gradient2(
@@ -61,9 +62,15 @@ We use the United States' GDP growth as a benchmark for comparison because it is
 
 
 ### What is the reasoning for these differences?
+Parallel coordinates
+
 
 ## How do their historical trends set them up for the future?
 
 
 ## How do Climate-related Challenges Impact Economy?
-    Maybe do a mosaic plot
+    Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita
+    
+    
+    We obtained the data from worldbank data
+    Interactive plot:

@@ -8,7 +8,7 @@
 
 <div id="plot">
 </div>
-
+<p></p>
 <button type="button" onclick="add()">Add Variable</button>
 <button type="button" onclick="remove()">Remove Variable</button>
 

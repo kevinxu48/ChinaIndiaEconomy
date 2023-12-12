@@ -46,6 +46,6 @@
     "href": "d3graph.html",
     "title": "4  Interactive graph",
     "section": "",
-    "text": "Add Variable\n\n\nRemove Variable"
+    "text": "Add Variable\n\n\nRemove Variable\n\n\nThis is a grouped bar chart obtained from 2022 data for visualizing the environmental problems that China and India face and how resilient the common people are to these challenges. There are a total of 6 variables and all of them are measured in terms of proportion. Press the “Add Variable” button to view a new variable or “Remove Variable” to remove the rightmost variable. We see that India utilizes a higher proportion of its natural resources compared to China, but China still faces more environmental challenges due to their high carbon dioxide production and low amounts of reusable energy sources."
   }
 ]

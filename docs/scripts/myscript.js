@@ -88,7 +88,7 @@
       .range([innerHeight, 0])
 
   const xAxis = d3.axisBottom(xScale)
-    .tickFormat((d, i) => {const customTickNames = ["Global CO2 Emission contribution","Global CO2 Emission contribution", "Electricity production from renewable sources", "Electricity production from renewable sources", "Forest area","Forest area", "Annual freshwater withdrawals","Annual freshwater withdrawals", "Access to electricity","Access to electricity", "Sanitation Services Usage","Sanitation Services Usage"];
+    .tickFormat((d, i) => {const customTickNames = ["Global CO2 Emission contribution","Global CO2 Emission contribution", "Electricity production from renewable sources", "Electricity production from renewable sources", "Forest area","Forest area", "Annual freshwater withdrawals","Annual freshwater withdrawals", "Population Access to Electricity","Population Access to Electricity", "Sanitation Services Accessibility /Usage","Sanitation Services Accessibility /Usage"];
             return customTickNames[i];
     });
 

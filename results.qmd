@@ -3,6 +3,24 @@
 ### Temporary Headings. Replace with something meaningful that summarizes the plots we create
 
 ```{r}
+#packages and helper functions 
+library(maps)
+library(sf)
+library(viridis)
+library(gridExtra)
+library(ggthemes)
+kv_theme <- function (){
+  theme_minimal() %+replace%
+    theme(legend.title = element_blank(),
+          plot.title = element_text(
+            size = 12,
+            face = 'bold',
+            hjust = 0,
+            vjust = 0))
+}
+```
+
+```{r}
 inflation <- read.csv("inflation.csv", header = TRUE, check.names = FALSE)
 inflation <- pivot_longer(inflation, cols='1960':'2022', names_to = "year", values_to = "inflation") %>%
   mutate(year = as.integer(year)) %>% filter(year >= 1989)
@@ -196,6 +214,40 @@ global_emit <- ggplot(data = world_ghg, mapping = aes(x = long, y = lat, group =
   coord_map("moll")
 global_emit
 
+```
+
+```{r}
+gain <- read.csv("gain.csv", header = TRUE, check.names = FALSE)
+ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
+
+gain <- pivot_longer(gain,cols='1995':'2021', names_to = "year", values_to = "score")
+ghg$`1990` <- as.numeric(ghg$`1990`)
+ghg$Country <- as.factor(ghg$Country)
+ghg <- pivot_longer(ghg, cols='2020':'1990', names_to = "year", values_to = "emissions")
+
+ghg_CI <- ghg %>% filter(Country %in% c("India", "China"))
+gain_CI <- gain %>% filter(Name %in% c("India", "China"))
+
+gain_CI$Name <- as.factor(gain_CI$Name)
+gain_CI$year <- as.integer(gain_CI$year)
+gain_CI <- gain_CI %>% mutate(Country = Name) %>% group_by(Country) %>% select(-Name)
+
+ghg_CI$Country <- as.factor(ghg_CI$Country)
+ghg_CI$year <- as.integer(ghg_CI$year)
+ghg_CI <- ghg_CI %>% group_by(Country)
+
+custom_colors <- c("China" = "red", "India" = "green4")
+merge1 <- merge(ghg_CI, gain_CI, by = c("year", "Country")) %>%
+  select(year, Country, emissions, score) %>% 
+  mutate(score = scale(score), emissions = scale(emissions))
+
+merge1 <- pivot_longer(merge1,cols='emissions':'score', names_to = "variable", values_to = "value")
+
+merge1 %>% group_by(Country, variable) %>%
+  ggplot() + geom_line(aes(x = year, y = value, color = Country, linetype = variable),linewidth = 1) +
+  scale_color_manual(values = custom_colors) +
+  kv_theme() + 
+  labs(x = "", y = "", title = "GHG emissions versus ND-Gain score over time")
 ```
 
     Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita

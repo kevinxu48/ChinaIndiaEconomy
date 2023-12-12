@@ -1,6 +1,61 @@
 # Results
 
 ### Temporary Headings. Replace with something meaningful that summarizes the plots we create
+
+```{r}
+inflation <- read.csv("inflation.csv", header = TRUE, check.names = FALSE)
+inflation <- pivot_longer(inflation, cols='1960':'2022', names_to = "year", values_to = "inflation") %>%
+  mutate(year = as.integer(year)) %>% filter(year >= 1989)
+inflation <- inflation %>%
+  arrange(year) %>%
+  group_by(`Country Name`) %>%
+  mutate(inf_change = (((inflation - lag(inflation)) /lag(inflation)) *100)) %>%
+  filter(`Country Name` %in% c("China", "India")) %>% rename(Country = `Country Name`) %>%
+  select(Country, year, inf_change)
+
+unemp <- read.csv("unemployment.csv", header = TRUE, check.names = FALSE)
+unemp <- pivot_longer(unemp, cols='1960':'2022', names_to = "year", values_to = "unemployment") %>%
+  mutate(year = as.integer(year)) %>% filter(year >= 1989)
+unemp <- unemp %>%
+  arrange(year) %>%
+  group_by(Country) %>%
+  mutate(unemp_change = (((unemployment - lag(unemployment)) /lag(unemployment)) *100)) %>%
+  filter(Country %in% c("China", "India")) %>%
+  select(Country, year, unemp_change)
+
+GDP_growth <- read.csv("GDP_growth.csv", header = TRUE, check.names = FALSE)
+GDP_growth <- pivot_longer(GDP_growth, cols='1960':'2022', names_to = "year", values_to = "GDPgrowth") %>%
+  mutate(year = as.integer(year), GDPgrowth = (GDPgrowth)) %>%
+  filter(year >= 1989) %>% rename(Country = `Country Name`) %>%
+  select(Country, year, GDPgrowth)
+
+#Year-over-year comparison of key economic factors
+yoy_comp <- GDP_growth %>%
+  merge(inflation, by = c("Country", "year")) %>%
+  merge(unemp, by = c("Country", "year")) %>%
+  mutate(Country = as.factor(Country)) %>% 
+  rename(GDP = GDPgrowth, `Unemployment Rate` = unemp_change, Inflation = inf_change)
+
+yoy_comp <- pivot_longer(yoy_comp, cols='GDP':'Unemployment Rate', names_to = "indicator", values_to = "value")
+
+yoyc_China <- yoy_comp %>% filter(year >= 2018 & Country == "China") %>%
+  ggplot() +
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge") +
+  scale_fill_brewer(palette = "YlOrRd") + 
+  kv_theme() + 
+  labs(x = "", y = "(%)", title = "China")
+
+yoyc_India <- yoy_comp %>% filter(year >= 2018 & Country == "India") %>%
+  ggplot() +
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge") +
+  scale_fill_brewer(palette = "YlGn") + 
+  kv_theme() + 
+  labs(x = "", y = "(%)", title = "India")
+
+grid.arrange(yoyc_China, yoyc_India, top = "Year over year changes in key economic indicators")
+
+```
+
 ## How have China and India's growth stories differed?
 ```{r}
 library(tidyr)

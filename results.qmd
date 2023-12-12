@@ -266,9 +266,7 @@ gain_21 %>% filter(Name %in% G20) %>%
   ggplot(aes(year, Name, fill = score_cat)) + 
     geom_tile(alpha = 0.95) + kv_theme() +
   scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + 
-  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) + 
-  labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") + 
-  theme(plot.title = element_text(margin = margin(b = 10)))
+  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  theme(plot.title = element_text(margin = margin(b = 10)))
 
 
 ```

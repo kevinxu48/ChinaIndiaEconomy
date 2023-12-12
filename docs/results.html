@@ -330,7 +330,7 @@ The following object is masked from 'package:readr':
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Exports"</span>)]</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> exports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>exports<span class="sc">$</span>Exports <span class="ot">=</span> exports<span class="sc">$</span>Exports<span class="sc">/</span>(<span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports[((imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(imports,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"Imports"</span>)</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
@@ -339,15 +339,29 @@ The following object is masked from 'package:readr':
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Imports"</span>)]</span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>importexports <span class="ot">=</span> <span class="fu">merge</span>(exports,imports,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"year"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># make imports negative value for plot</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>imports<span class="sc">$</span>Imports <span class="ot">=</span> imports<span class="sc">$</span>Imports<span class="sc">/</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>importexports <span class="ot">=</span> <span class="fu">merge</span>(exports,imports,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"year"</span>))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>pivotimportexports <span class="ot">=</span> <span class="fu">pivot_longer</span>(importexports, <span class="at">cols=</span><span class="fu">c</span>(<span class="st">"Exports"</span>,<span class="st">"Imports"</span>), <span class="at">names_to =</span> <span class="st">"type"</span>,<span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(importexports,aes(x=imports,y=exports,fill=Group))+geom_bar(stat="identity")+coord_flip()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pivotimportexports,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>value,<span class="at">fill=</span>type))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"year"</span>)<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Amount spent on Imports/Exports (Billion $USD)"</span>)<span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.,<span class="at">scales=</span><span class="st">"free_y"</span>)<span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China has Significantly Higher Amounts Imported and Exported"</span>)<span class="sc">+</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
 </section>

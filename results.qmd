@@ -184,6 +184,42 @@ ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
 ```
 ## How do their historical trends set them up for the future?
 
+## Why are China and India Succeptible to Environmental Impact?
+
+```{r}
+# units of (quad Btu)
+chinaenergy = read.csv("chinaenergy.csv")
+indiaenergy = read.csv("indiaenergy.csv")
+energy = rbind(chinaenergy,indiaenergy)
+
+energy = pivot_longer(energy,cols='X1980':'X2021', names_to = "Year", values_to = "Total Production")
+energy = pivot_wider(energy, names_from = Type,values_from = `Total Production`)
+
+  
+energy = energy %>% mutate(coal = Coal/Production)%>% 
+  mutate(`natural gas` = `Natural Gas`/Production)%>%
+  mutate(petroleum = `Petroleum and other liquids`/Production)%>% 
+  mutate(renewable = `Nuclear, renewables, and other`/Production)
+energy$Year<-gsub("X","",as.character(energy$Year))
+energy$Year <- as.integer(energy$Year)
+energy = pivot_longer(energy,cols='coal':'renewable', names_to = "Energy Usage Proportions", values_to = "Percentages")
+energyrecent = energy[energy$Year >= 2010,]
+```
+
+```{r,fig.height=15,fig.width=20}
+colors = c("darkred","yellow","tan","blue")
+
+ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = `Energy Usage Proportions`)) +
+  geom_bar(position="fill", stat="identity")+
+  facet_wrap(~Year)+
+  scale_fill_manual(values = colors) +
+  theme(legend.position = "bottom")+
+  theme_minimal()+
+   theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("Renewable Energy Usage has not Significantly Increased for Either Country")+ 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
 
 ## How do Climate-related Challenges Impact Economy?
 
@@ -262,11 +298,11 @@ gain_21$score_cat <- cut(gain_21$score,
                          breaks = quantiles,
                          labels = c("Low", "Medium", "High"))
 
-gain_21 %>% filter(Name %in% G20) %>% 
-  ggplot(aes(year, Name, fill = score_cat)) + 
-    geom_tile(alpha = 0.95) + kv_theme() +
-  scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + 
-  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  theme(plot.title = element_text(margin = margin(b = 10)))
+#gain_21 %>% filter(Name %in% G20) %>% 
+#  ggplot(aes(year, Name, fill = score_cat)) + 
+#    geom_tile(alpha = 0.95) + kv_theme() +
+#  scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + 
+#  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  theme(plot.title = element_text(margin = margin(b = 10)))
 
 
 ```

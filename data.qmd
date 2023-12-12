@@ -48,13 +48,12 @@ library(dplyr)
 library(scales)
 
 unemployment = read.csv("unemployment.csv")
-chinaindia = unemployment[((unemployment$`Country.Name` == 'China')| (unemployment$`Country.Name` == 'India')) , ]
+chinaindia = unemployment[((unemployment$`Country` == 'China')| (unemployment$`Country` == 'India')) , ]
 L = pivot_longer(chinaindia,cols='X1960':'X2022', names_to = "year", values_to = "unemployment")
 L$year<-gsub("X","",as.character(L$year))
 #L$year <- as.integer(L$year)
 
-final = L[c("Country.Name", "Indicator.Name", "year", "unemployment")]
-final = final %>% rename(Country = `Country.Name`)
+final = L[c("Country", "Indicator.Name", "year", "unemployment")]
 ```
 
 ```{r,fig.width=10}
@@ -71,10 +70,6 @@ ggplot(final, aes(year,Country, fill = unemployment)) +
 Similarly, for the GDP growth for both countries, we see that this time we have much more data from previous decades up until 1960. Since this value is missing for both China and India, we can again remove this missing value because not know this value is not that important because we have so much other data past 1960. Thus, we can see that the only missing values in any of these datasets will be where the countries have no data for a certain period of time. Since we will have data from different periods of time for different metrics that determnine economic growth, instead of looking at time periods that contain no missing data, we will instead use all the available data because both countries contain nonmissing data for the same years, which allows for easy comparisons.
 
 ```{r}
-library(tidyr)
-library(tidyverse)
-library(ggplot2)
-
 gain = read.csv("gain.csv")
 
 chinaindiaclimate = gain[((gain$Name == 'China')| (gain$Name == 'India')) , ]
@@ -101,10 +96,6 @@ ggplot(finalcic, aes(year,Country, fill = NDGain_index)) +
 Now we will look at the environmental dataset that is not obtained from the World Bank website. To view any missing values, again we subset the data to include only China and India, then pivot longer. We see after displaying the row and column values in a heatmap that there are no missing values in this dataset. However, we only have data starting from 1995, which is still a good amount of time to observe the trend in each country.
 
 ```{r}
-library(tidyr)
-library(tidyverse)
-library(ggplot2)
-
 GDP = read.csv("GDP.csv")
 chinaindia = GDP[((GDP$`Country.Name` == 'China')| (GDP$`Country.Name` == 'India')) , ]
 L = pivot_longer(chinaindia,cols='X1960':'X2022', names_to = "year", values_to = "GDP Growth %")

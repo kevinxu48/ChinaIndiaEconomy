@@ -266,13 +266,12 @@ The following object is masked from 'package:readr':
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>unemployment <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"unemployment.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>chinaindia <span class="ot">=</span> unemployment[((unemployment<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (unemployment<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>chinaindia <span class="ot">=</span> unemployment[((unemployment<span class="sc">$</span><span class="st">`</span><span class="at">Country</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (unemployment<span class="sc">$</span><span class="st">`</span><span class="at">Country</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(chinaindia,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"unemployment"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#L$year &lt;- as.integer(L$year)</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"unemployment"</span>)]</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> final <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"unemployment"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -293,19 +292,15 @@ The following object is masked from 'package:readr':
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"gain.csv"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>chinaindiaclimate <span class="ot">=</span> gain[((gain<span class="sc">$</span>Name <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (gain<span class="sc">$</span>Name <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ciclonger <span class="ot">=</span> <span class="fu">pivot_longer</span>(chinaindiaclimate,<span class="at">cols=</span><span class="st">'X1995'</span><span class="sc">:</span><span class="st">'X2021'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"NDGain_index"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ciclonger<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(ciclonger<span class="sc">$</span>year))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ciclonger<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(ciclonger<span class="sc">$</span>year)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>finalcic <span class="ot">=</span> ciclonger[<span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"year"</span>, <span class="st">"NDGain_index"</span>)]</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>finalcic <span class="ot">=</span> finalcic <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> Name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"gain.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>chinaindiaclimate <span class="ot">=</span> gain[((gain<span class="sc">$</span>Name <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (gain<span class="sc">$</span>Name <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ciclonger <span class="ot">=</span> <span class="fu">pivot_longer</span>(chinaindiaclimate,<span class="at">cols=</span><span class="st">'X1995'</span><span class="sc">:</span><span class="st">'X2021'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"NDGain_index"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ciclonger<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(ciclonger<span class="sc">$</span>year))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ciclonger<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(ciclonger<span class="sc">$</span>year)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>finalcic <span class="ot">=</span> ciclonger[<span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"year"</span>, <span class="st">"NDGain_index"</span>)]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>finalcic <span class="ot">=</span> finalcic <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> Name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -326,19 +321,15 @@ The following object is masked from 'package:readr':
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>GDP <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP.csv"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>chinaindia <span class="ot">=</span> GDP[((GDP<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(chinaindia,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP Growth %"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>GDP <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP.csv"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>chinaindia <span class="ot">=</span> GDP[((GDP<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) , ]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(chinaindia,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP Growth %"</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#L$year &lt;- as.integer(L$year)</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP Growth %"</span>)]</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> final <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#L$year &lt;- as.integer(L$year)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP Growth %"</span>)]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>final <span class="ot">=</span> final <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">

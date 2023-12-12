@@ -208,30 +208,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" class="level3" data-number="3.0.1">
 <h3 data-number="3.0.1" class="anchored" data-anchor-id="temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create"><span class="header-section-number">3.0.1</span> Temporary Headings. Replace with something meaningful that summarizes the plots we create</h3>
-</section>
-<section id="how-have-china-and-indias-growth-stories-differed" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="how-have-china-and-indias-growth-stories-differed"><span class="header-section-number">3.1</span> How have China and India’s growth stories differed?</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#packages and helper functions </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapproj)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.2, GDAL 3.7.2, PROJ 9.3.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: viridisLite</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'viridis'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:maps':
+
+    unemp</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ purrr     1.0.2
 ✔ forcats   1.0.0     ✔ readr     2.1.4
 ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
-✔ lubridate 1.9.3     ✔ tibble    3.2.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
+✔ lubridate 1.9.3     ✔ tibble    3.2.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::combine() masks gridExtra::combine()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ purrr::map()     masks maps::map()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -243,72 +272,151 @@ The following object is masked from 'package:purrr':
 
 The following object is masked from 'package:readr':
 
-    col_factor</code></pre>
+    col_factor
+
+The following object is masked from 'package:viridis':
+
+    viridis_pal</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>GDP_values <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP_values.csv"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_values[((GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_vals,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP per Cap"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP per Cap"</span>)]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_vals <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP.csv"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth[((GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) <span class="sc">|</span>  (GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'United States'</span>), ]</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_growth,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP Growth %"</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP Growth %"</span>)]</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>kv_theme <span class="ot">&lt;-</span> <span class="cf">function</span> (){</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">%+replace%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">12</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">face =</span> <span class="st">'bold'</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="dv">0</span>))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_vals, <span class="fu">aes</span>(year,<span class="st">`</span><span class="at">GDP per Cap</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.)<span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"GDP Per Capita (US$)"</span>)<span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>)<span class="sc">+</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Historically China has Significantly Higher GDP Per Capita"</span>)<span class="sc">+</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>inflation <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"inflation.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>inflation <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(inflation, <span class="at">cols=</span><span class="st">'1960'</span><span class="sc">:</span><span class="st">'2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"inflation"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1989</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>inflation <span class="ot">&lt;-</span> inflation <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">inf_change =</span> (((inflation <span class="sc">-</span> <span class="fu">lag</span>(inflation)) <span class="sc">/</span><span class="fu">lag</span>(inflation)) <span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"China"</span>, <span class="st">"India"</span>)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, year, inf_change)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"unemployment.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(unemp, <span class="at">cols=</span><span class="st">'1960'</span><span class="sc">:</span><span class="st">'2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"unemployment"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1989</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> unemp <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">unemp_change =</span> (((unemployment <span class="sc">-</span> <span class="fu">lag</span>(unemployment)) <span class="sc">/</span><span class="fu">lag</span>(unemployment)) <span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"China"</span>, <span class="st">"India"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, year, unemp_change)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"GDP_growth.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(GDP_growth, <span class="at">cols=</span><span class="st">'1960'</span><span class="sc">:</span><span class="st">'2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDPgrowth"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year), <span class="at">GDPgrowth =</span> (GDPgrowth)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1989</span>) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, year, GDPgrowth)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Year-over-year comparison of key economic factors</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>yoy_comp <span class="ot">&lt;-</span> GDP_growth <span class="sc">%&gt;%</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(inflation, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"year"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(unemp, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"year"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">as.factor</span>(Country)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">GDP =</span> GDPgrowth, <span class="st">`</span><span class="at">Unemployment Rate</span><span class="st">`</span> <span class="ot">=</span> unemp_change, <span class="at">Inflation =</span> inf_change)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>yoy_comp <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(yoy_comp, <span class="at">cols=</span><span class="st">'GDP'</span><span class="sc">:</span><span class="st">'Unemployment Rate'</span>, <span class="at">names_to =</span> <span class="st">"indicator"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>yoyc_China <span class="ot">&lt;-</span> yoy_comp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2019</span> <span class="sc">&amp;</span> Country <span class="sc">==</span> <span class="st">"China"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">fill =</span> indicator), <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>) <span class="sc">+</span> </span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>() <span class="sc">+</span> </span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"(%)"</span>, <span class="at">title =</span> <span class="st">"China"</span>)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>yoyc_India <span class="ot">&lt;-</span> yoy_comp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2019</span> <span class="sc">&amp;</span> Country <span class="sc">==</span> <span class="st">"India"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">fill =</span> indicator), <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGn"</span>) <span class="sc">+</span> </span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>() <span class="sc">+</span> </span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"(%)"</span>, <span class="at">title =</span> <span class="st">"India"</span>)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(yoyc_China, yoyc_India, <span class="at">top =</span> <span class="st">"Year over year changes in key economic indicators"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="how-have-china-and-indias-growth-stories-differed" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="how-have-china-and-indias-growth-stories-differed"><span class="header-section-number">3.1</span> How have China and India’s growth stories differed?</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>GDP_values <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP_values.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_values[((GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_values<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_vals,<span class="at">cols=</span><span class="st">'X1960'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP per Cap"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP per Cap"</span>)]</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>GDP_vals <span class="ot">=</span> GDP_vals <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"GDP.csv"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth[((GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)) <span class="sc">|</span>  (GDP_growth<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'United States'</span>), ]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(GDP_growth,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"GDP Growth %"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"GDP Growth %"</span>)]</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_vals, <span class="fu">aes</span>(year,<span class="st">`</span><span class="at">GDP per Cap</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.)<span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"GDP Per Capita (US$)"</span>)<span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>)<span class="sc">+</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Historically China has Significantly Higher GDP Per Capita"</span>)<span class="sc">+</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1440"></p>
+<p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <p>Gross domestic product (GDP) per capita is a metric that describes a country’s economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China’s has skyrocketed compared to India’s. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India’s GDP per Capita to surpass China’s.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_growth, <span class="fu">aes</span>(year,Country, <span class="at">fill =</span> <span class="st">`</span><span class="at">GDP Growth %</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China's GDP has Generally Grown Faster than India's since 1960"</span>)<span class="sc">+</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">muted</span>(<span class="st">"orange"</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="fu">muted</span>(<span class="st">"green"</span>),</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">0</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_growth, <span class="fu">aes</span>(year,Country, <span class="at">fill =</span> <span class="st">`</span><span class="at">GDP Growth %</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"Black"</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China's GDP has Generally Grown Faster than India's since 1960"</span>)<span class="sc">+</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">muted</span>(<span class="st">"orange"</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="fu">muted</span>(<span class="st">"green"</span>),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">0</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1440"></p>
+<p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <p>We use the United States’ GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country.</p>
@@ -319,48 +427,49 @@ The following object is masked from 'package:readr':
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"exports.csv"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"imports.csv"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> exports[((exports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (exports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(exports,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"Exports"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Exports"</span>)]</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> exports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>exports<span class="sc">$</span>Exports <span class="ot">=</span> exports<span class="sc">$</span>Exports<span class="sc">/</span>(<span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports[((imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(imports,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"Imports"</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Imports"</span>)]</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># make imports negative value for plot</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>imports<span class="sc">$</span>Imports <span class="ot">=</span> imports<span class="sc">$</span>Imports<span class="sc">/</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>importexports <span class="ot">=</span> <span class="fu">merge</span>(exports,imports,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"year"</span>))</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>pivotimportexports <span class="ot">=</span> <span class="fu">pivot_longer</span>(importexports, <span class="at">cols=</span><span class="fu">c</span>(<span class="st">"Exports"</span>,<span class="st">"Imports"</span>), <span class="at">names_to =</span> <span class="st">"type"</span>,<span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"exports.csv"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"imports.csv"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> exports[((exports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (exports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(exports,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"Exports"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Exports"</span>)]</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>exports <span class="ot">=</span> exports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>exports<span class="sc">$</span>Exports <span class="ot">=</span> exports<span class="sc">$</span>Exports<span class="sc">/</span>(<span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports[((imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'China'</span>)<span class="sc">|</span> (imports<span class="sc">$</span><span class="st">`</span><span class="at">Country.Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">'India'</span>)), ]</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fu">pivot_longer</span>(imports,<span class="at">cols=</span><span class="st">'X1961'</span><span class="sc">:</span><span class="st">'X2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"Imports"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(L<span class="sc">$</span>year))</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(L<span class="sc">$</span>year)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> L[<span class="fu">c</span>(<span class="st">"Country.Name"</span>, <span class="st">"Indicator.Name"</span>, <span class="st">"year"</span>, <span class="st">"Imports"</span>)]</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>imports <span class="ot">=</span> imports <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># make imports negative value for plot</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>imports<span class="sc">$</span>Imports <span class="ot">=</span> imports<span class="sc">$</span>Imports<span class="sc">/</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">**</span><span class="dv">9</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>importexports <span class="ot">=</span> <span class="fu">merge</span>(exports,imports,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"year"</span>))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>pivotimportexports <span class="ot">=</span> <span class="fu">pivot_longer</span>(importexports, <span class="at">cols=</span><span class="fu">c</span>(<span class="st">"Exports"</span>,<span class="st">"Imports"</span>), <span class="at">names_to =</span> <span class="st">"type"</span>,<span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pivotimportexports,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>value,<span class="at">fill=</span>type))<span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"year"</span>)<span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Amount spent on Imports/Exports (Billion $USD)"</span>)<span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.,<span class="at">scales=</span><span class="st">"free_y"</span>)<span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China has Significantly Higher Amounts Imported and Exported"</span>)<span class="sc">+</span> </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pivotimportexports,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>value,<span class="at">fill=</span>type))<span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"year"</span>)<span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Amount spent on Imports/Exports (Billion $USD)"</span>)<span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(Country<span class="sc">~</span>.,<span class="at">scales=</span><span class="st">"free_y"</span>)<span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen3"</span>, <span class="st">"red3"</span>))<span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">80</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"China has Significantly Higher Amounts Imported and Exported"</span>)<span class="sc">+</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="results_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -370,6 +479,101 @@ The following object is masked from 'package:readr':
 </section>
 <section id="how-do-climate-related-challenges-impact-economy" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.3</span> How do Climate-related Challenges Impact Economy?</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ghg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"historical_emissions.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ghg<span class="sc">$</span><span class="st">`</span><span class="at">1990</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ghg<span class="sc">$</span><span class="st">`</span><span class="at">1990</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ghg<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ghg<span class="sc">$</span>Country)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ghg <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(ghg, <span class="at">cols=</span><span class="st">'2020'</span><span class="sc">:</span><span class="st">'1990'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"emissions"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span> long <span class="sc">&gt;</span> <span class="dv">180</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> region) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">factor</span>(Country))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(world<span class="sc">$</span>Country, ghg<span class="sc">$</span>Country)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">recode</span>(<span class="fu">str_trim</span>(Country),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"USA"</span> <span class="ot">=</span> <span class="st">"United States"</span>, <span class="st">"UK"</span> <span class="ot">=</span> <span class="st">"United Kingdom"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"Turkey"</span> <span class="ot">=</span> <span class="st">"Türkiye"</span>, <span class="st">"Trinidad"</span> <span class="ot">=</span> <span class="st">"Trinidad and Tobago"</span>))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ghg_2019 <span class="ot">&lt;-</span> ghg <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2019</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>world_ghg <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(world, ghg_2019, <span class="at">by =</span> <span class="st">"Country"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>global_emit <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> world_ghg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">fill =</span> emissions)) <span class="sc">+</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Global greenhouse gas emissions in 2019 (metric tons)"</span>) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>() <span class="sc">+</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">20</span>))) <span class="sc">+</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>(<span class="st">"moll"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>global_emit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gain <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"gain.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ghg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"historical_emissions.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>gain <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(gain,<span class="at">cols=</span><span class="st">'1995'</span><span class="sc">:</span><span class="st">'2021'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"score"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>ghg<span class="sc">$</span><span class="st">`</span><span class="at">1990</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ghg<span class="sc">$</span><span class="st">`</span><span class="at">1990</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ghg<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ghg<span class="sc">$</span>Country)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ghg <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(ghg, <span class="at">cols=</span><span class="st">'2020'</span><span class="sc">:</span><span class="st">'1990'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"emissions"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>ghg_CI <span class="ot">&lt;-</span> ghg <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"India"</span>, <span class="st">"China"</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>gain_CI <span class="ot">&lt;-</span> gain <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"India"</span>, <span class="st">"China"</span>))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>gain_CI<span class="sc">$</span>Name <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(gain_CI<span class="sc">$</span>Name)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>gain_CI<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(gain_CI<span class="sc">$</span>year)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>gain_CI <span class="ot">&lt;-</span> gain_CI <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Country =</span> Name) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Name)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ghg_CI<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ghg_CI<span class="sc">$</span>Country)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ghg_CI<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(ghg_CI<span class="sc">$</span>year)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ghg_CI <span class="ot">&lt;-</span> ghg_CI <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Country)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"China"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"India"</span> <span class="ot">=</span> <span class="st">"green4"</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>merge1 <span class="ot">&lt;-</span> <span class="fu">merge</span>(ghg_CI, gain_CI, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"Country"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, Country, emissions, score) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">score =</span> <span class="fu">scale</span>(score), <span class="at">emissions =</span> <span class="fu">scale</span>(emissions))</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>merge1 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(merge1,<span class="at">cols=</span><span class="st">'emissions'</span><span class="sc">:</span><span class="st">'score'</span>, <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>merge1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Country, variable) <span class="sc">%&gt;%</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">color =</span> Country, <span class="at">linetype =</span> variable),<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> custom_colors) <span class="sc">+</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>() <span class="sc">+</span> </span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"GHG emissions versus ND-Gain score over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <pre><code>Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita</code></pre>
 <p>Bar chart with imports going i</p>
 

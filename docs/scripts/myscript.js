@@ -21,7 +21,7 @@
 
   // Add title
   svg.append("text")
-      .attr("x", 300)
+      .attr("x", 250)
       .attr("y", 50)
       .attr("font-weight", "bold")
       .style("font-size", "25px")
@@ -110,15 +110,15 @@
       .attr("height", d => innerHeight - yScale(d))
       .attr("fill", (d,i) => i === 0 ? "red" : "green")
       .on("mouseover", function (event, d) {
-        const tooltip = svg.append("text")
-          .attr("class", "tooltip")
+        const bartooltip = svg.append("text")
+          .attr("id", "bartooltip")
           .attr("x", +d3.select(this).attr("x") + xScale.bandwidth() / 1.5)
           .attr("y", +d3.select(this).attr("y") + 45)
           .text(d)
           .attr("text-anchor", "middle");
       })
       .on("mouseout", function () {
-        svg.select(".tooltip").remove();
+        svg.select("#bartooltip").remove();
       });
 
 
@@ -149,17 +149,7 @@
         .data(data);
 
     const paddingpix = xScale.padding()*xScale.bandwidth()/(1 - xScale.padding())
-    bars.on("mouseover", function(d) {
-    const tooltip = svg.append("text")
-        .attr("class", "tooltip")
-        .attr("x", +d3.select(this).attr("x") + xScale.bandwidth() / 2)
-        .attr("y", +d3.select(this).attr("y") - 5)
-        .text(d)
-        .attr("text-anchor", "middle");
-    })
-    .on("mouseout", function() {
-        svg.select(".tooltip").remove();
-    });
+
 
     bars.enter().append("rect")
         .attr("x", innerWidth + paddingpix)  // new bar on the right
@@ -198,15 +188,15 @@
 
      svg.selectAll("rect")
         .on("mouseover", function(event, d) {
-            const tooltip = svg.append("text")
-                .attr("class", "tooltip")
+            const bartooltip = svg.append("text")
+                .attr("id", "bartooltip")
                 .attr("x", +d3.select(this).attr("x") + xScale.bandwidth() / 0.9)
                 .attr("y", +d3.select(this).attr("y") + 70)
                 .text(d)
                 .attr("text-anchor", "middle");
         })
         .on("mouseout", function() {
-            svg.select(".tooltip").remove();
+            svg.select("#bartooltip").remove();
         });
   }
 
@@ -258,15 +248,15 @@
 
      svg.selectAll("rect")
         .on("mouseover", function(event, d) {
-            const tooltip = svg.append("text")
-                .attr("class", "tooltip")
+            const bartooltip = svg.append("text")
+                .attr("id", "bartooltip")
                 .attr("x", +d3.select(this).attr("x") + xScale.bandwidth()/0.9)
                 .attr("y", +d3.select(this).attr("y") + 70)
                 .text(d)
                 .attr("text-anchor", "middle");
         })
         .on("mouseout", function() {
-            svg.select(".tooltip").remove();
+            svg.select("#bartooltip").remove();
         });
   }
 

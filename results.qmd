@@ -78,7 +78,7 @@ L$year <- as.integer(L$year)
 
 exports = L[c("Country.Name", "Indicator.Name", "year", "Exports")]
 exports = exports %>% rename(Country = "Country.Name")
-
+exports$Exports = exports$Exports/(10**9)
 imports = imports[((imports$`Country.Name` == 'China')| (imports$`Country.Name` == 'India')), ]
 L = pivot_longer(imports,cols='X1961':'X2022', names_to = "year", values_to = "Imports")
 
@@ -87,14 +87,23 @@ L$year <- as.integer(L$year)
 
 imports = L[c("Country.Name", "Indicator.Name", "year", "Imports")]
 imports = imports %>% rename(Country = "Country.Name")
+# make imports negative value for plot
+imports$Imports = imports$Imports/(-10**9)
 
 importexports = merge(exports,imports,by=c("Country","year"))
+pivotimportexports = pivot_longer(importexports, cols=c("Exports","Imports"), names_to = "type",values_to = "value")
 ```
 
 ```{r}
-
-
-#ggplot(importexports,aes(x=imports,y=exports,fill=Group))+geom_bar(stat="identity")+coord_flip()
+ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
+    geom_bar(stat="identity")+
+    xlab("year")+
+    ylab("Amount spent on Imports/Exports (Billion $USD)")+
+    facet_wrap(Country~.,scales="free_y")+
+  coord_flip()+
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  ggtitle("China has Significantly Higher Amounts Imported and Exported")+ 
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 ## How do their historical trends set them up for the future?
 

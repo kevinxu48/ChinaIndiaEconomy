@@ -106,6 +106,7 @@ GDP_growth = L[c("Country.Name", "Indicator.Name", "year", "GDP Growth %")]
 GDP_growth = GDP_growth %>% rename(Country = "Country.Name")
 ```
 
+### Dot Plot with Smoother- GDP per Capita  
 ```{r,fig.width=15}
 ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
   geom_point(color = "Black") +
@@ -120,6 +121,7 @@ ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
 Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China's GDP per capita has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's. Both countries seem to be at an upward trajectory, but it remains to be seen if China's growth will stagnate while India continues their increasing trend of GDP per capita growth.
 
 
+### Heatmap - GDP Growth %
 ```{r,fig.width=15}
 ggplot(GDP_growth, aes(year,Country, fill = `GDP Growth %`)) +
   geom_tile(color = "Black") +
@@ -138,9 +140,6 @@ We use the United States' GDP growth as a benchmark for comparison because it is
 
 
 ### What is the reasoning for these differences?
-Parallel coordinates
-
-2 way bar chart with exports going one direction and imports going the other direction
 
 ```{r}
 exports = read.csv("exports.csv")
@@ -170,6 +169,7 @@ importexports = merge(exports,imports,by=c("Country","year"))
 pivotimportexports = pivot_longer(importexports, cols=c("Exports","Imports"), names_to = "type",values_to = "value")
 ```
 
+### Diverging Bar Chart - Imports vs Exports
 ```{r}
 ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
     geom_bar(stat="identity")+
@@ -182,9 +182,10 @@ ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
   ggtitle("China has Significantly Higher Amounts Imported and Exported")+ 
   theme(plot.title = element_text(hjust = 0.5))
 ```
-In the previous plots, we have seen that China's economy has grown much faster that India's and in this plot we get a glimpse as to why. Exporting goods brings profits to a country which stimulates economic growth because they produce the goods for a lower price than they sell them for; countries import goods that they are unable to produce themselves. Thus, it is generally desirable for countries to export goods for profit rather than import. First, China exports many more goods and services than India does. From the plot we see that since the year 2006, China has exported over 1 trillion US dollars worth of goods and has reached about 3.7 trillion $USD in 2022. Meanwhile India has also exported many billions of US dollars worth of goods, but not to the amount that China has, and from the plot we see that ever since the year 2000 India imports more goods than they export.
+In the previous plots, we have seen that China's economy has grown much faster that India's and in this plot we get a glimpse as to why. Exporting goods brings profits to a country which stimulates economic growth because they produce the goods for a lower price than they sell them for; countries import goods that they are unable to produce themselves. Thus, it is generally desirable for countries to export goods for profit rather than import. First, China exports many more goods and services than India does. From the plot we see that since the year 2006, China has exported over 1 trillion US dollars worth of goods and has reached about 3.7 trillion $USD in 2022. Meanwhile India has also exported many billions of US dollars worth of goods, but not to the amount that China has, and from the plot we see that ever since the year 2000 India imports more goods than they export. Thus, it makes sense that India's rate of GDP growth has historically been less than China's. 
 
 ## Why are China and India Succeptible to Environmental Impact?
+Next, we will explore why China and India are considered the two of the most polluted countries in the world and are thus at high risk of environmental issues like climate change and resource depletion. Reducing environmental impacts is essential for a country's vitality because it disturbs the physical environment and the people living in it, and the entire world feels its negative effects. 
 
 ```{r}
 # units of (quad Btu)
@@ -205,13 +206,18 @@ energy$Year <- as.integer(energy$Year)
 energy = pivot_longer(energy,cols='coal':'clean', names_to = "Energy Usage Proportions", values_to = "Percentages")
 energyrecent = energy[energy$Year >= 2010,]
 energyrecent$`Energy Usage Proportions` = as.factor(energyrecent$`Energy Usage Proportions`)
+`Fuel Type` = factor(energyrecent$`Energy Usage Proportions`, levels = c("coal","natural gas","petroleum","clean"))
 ```
 
-## Stacked bar chart - Energy usage China/India
-```{r,fig.height=20,fig.width=30}
+### Stacked bar chart - Energy usage China/India
+```{r}
+#| out-width: 100%
+#| fig-height: 20
+#| fig-width: 20
+#| 
 colors = c("darkred","yellow3","tan","green3")
 
-ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = factor(`Energy Usage Proportions`, levels = c("coal","natural gas","petroleum","clean")))) +
+ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = `Fuel Type`)) +
   geom_bar(position="fill", stat="identity")+
   facet_wrap(~Year, scale="free_x")+
   scale_fill_manual(values = colors) +
@@ -222,11 +228,11 @@ ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = factor(`Energy Us
   theme(plot.title = element_text(hjust = 0.5))
 
 ```
-Next, we will explore why China and India are considered the two of the most polluted countries in the world and are thus at high risk of environmental issues like climate change and resource depletion. From the plot we see that since the year 2010, only a small fraction of both China and India's energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy, but there is a promising increase renewable energy sources in recent years. As of 2022, almost 20% of both countries' energy production are from clean energy sources such as nuclear or renewable energy.
+From the plot we see that since the year 2010, only a small fraction of both China and India's energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy than India, but there is a promising increase of renewable energy sources in recent years. As of 2021, almost 20% of both countries' energy production are from clean energy sources such as nuclear or renewable energy.  Thus, it is promising that these two countries are increasing their reliance on clean energy production instead of coal and natural gases. 
 
 https://www.epa.gov/ghgemissions/sources-greenhouse-gas-emissions 
 
-## Map - Global emissions
+### Map - Global emissions
 
 ```{r}
 ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
@@ -261,7 +267,7 @@ global_emit
 
 ```
 
-## Line plot - Emissions and Gain score over time for China/India  
+### Line plot - Emissions and Gain score over time for China/India  
 ```{r}
 gain <- read.csv("gain.csv", header = TRUE, check.names = FALSE)
 ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
@@ -296,7 +302,7 @@ merge1 %>% group_by(Country, variable) %>%
   labs(x = "", y = "", title = "GHG emissions versus ND-Gain score over time")
 ```
 
-## Heat map - Gain index for G20 countries 
+### Heat map - Gain index for G20 countries 
 ```{r}
 gain_21 <- gain %>% filter(year >= 1995) %>% na.omit()
 
@@ -319,7 +325,7 @@ gain_21 %>% filter(Name %in% G20) %>%
 
 ```
 
-## Line plot - Population and labor force China/India
+### Line plot - Population and labor force China/India
 ```{r}
 pop <- read.csv("Population.csv", header = TRUE, check.names = FALSE)
 LF <- read.csv("LaborForce.csv", header = TRUE, check.names = FALSE)

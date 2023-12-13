@@ -179,11 +179,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" id="toc-temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create" class="nav-link active" data-scroll-target="#temporary-headings.-replace-with-something-meaningful-that-summarizes-the-plots-we-create"><span class="header-section-number">3.0.1</span> Temporary Headings. Replace with something meaningful that summarizes the plots we create</a></li>
   <li><a href="#how-have-china-and-indias-growth-stories-differed" id="toc-how-have-china-and-indias-growth-stories-differed" class="nav-link" data-scroll-target="#how-have-china-and-indias-growth-stories-differed"><span class="header-section-number">3.1</span> How have China and India’s growth stories differed?</a>
   <ul class="collapse">
-  <li><a href="#what-is-the-reasoning-for-these-differences" id="toc-what-is-the-reasoning-for-these-differences" class="nav-link" data-scroll-target="#what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.1</span> What is the reasoning for these differences?</a></li>
+  <li><a href="#dot-plot-with-smoother--gdp-per-capita" id="toc-dot-plot-with-smoother--gdp-per-capita" class="nav-link" data-scroll-target="#dot-plot-with-smoother--gdp-per-capita"><span class="header-section-number">3.1.1</span> Dot Plot with Smoother- GDP per Capita</a></li>
+  <li><a href="#heatmap---gdp-growth" id="toc-heatmap---gdp-growth" class="nav-link" data-scroll-target="#heatmap---gdp-growth"><span class="header-section-number">3.1.2</span> Heatmap - GDP Growth %</a></li>
+  <li><a href="#what-is-the-reasoning-for-these-differences" id="toc-what-is-the-reasoning-for-these-differences" class="nav-link" data-scroll-target="#what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.3</span> What is the reasoning for these differences?</a></li>
+  <li><a href="#diverging-bar-chart---imports-vs-exports" id="toc-diverging-bar-chart---imports-vs-exports" class="nav-link" data-scroll-target="#diverging-bar-chart---imports-vs-exports"><span class="header-section-number">3.1.4</span> Diverging Bar Chart - Imports vs Exports</a></li>
   </ul></li>
-  <li><a href="#how-do-their-historical-trends-set-them-up-for-the-future" id="toc-how-do-their-historical-trends-set-them-up-for-the-future" class="nav-link" data-scroll-target="#how-do-their-historical-trends-set-them-up-for-the-future"><span class="header-section-number">3.2</span> How do their historical trends set them up for the future?</a></li>
-  <li><a href="#why-are-china-and-india-succeptible-to-environmental-impact" id="toc-why-are-china-and-india-succeptible-to-environmental-impact" class="nav-link" data-scroll-target="#why-are-china-and-india-succeptible-to-environmental-impact"><span class="header-section-number">3.3</span> Why are China and India Succeptible to Environmental Impact?</a></li>
-  <li><a href="#how-do-climate-related-challenges-impact-economy" id="toc-how-do-climate-related-challenges-impact-economy" class="nav-link" data-scroll-target="#how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.4</span> How do Climate-related Challenges Impact Economy?</a></li>
+  <li><a href="#why-are-china-and-india-succeptible-to-environmental-impact" id="toc-why-are-china-and-india-succeptible-to-environmental-impact" class="nav-link" data-scroll-target="#why-are-china-and-india-succeptible-to-environmental-impact"><span class="header-section-number">3.2</span> Why are China and India Succeptible to Environmental Impact?</a>
+  <ul class="collapse">
+  <li><a href="#stacked-bar-chart---energy-usage-chinaindia" id="toc-stacked-bar-chart---energy-usage-chinaindia" class="nav-link" data-scroll-target="#stacked-bar-chart---energy-usage-chinaindia"><span class="header-section-number">3.2.1</span> Stacked bar chart - Energy usage China/India</a></li>
+  <li><a href="#map---global-emissions" id="toc-map---global-emissions" class="nav-link" data-scroll-target="#map---global-emissions"><span class="header-section-number">3.2.2</span> Map - Global emissions</a></li>
+  <li><a href="#line-plot---emissions-and-gain-score-over-time-for-chinaindia" id="toc-line-plot---emissions-and-gain-score-over-time-for-chinaindia" class="nav-link" data-scroll-target="#line-plot---emissions-and-gain-score-over-time-for-chinaindia"><span class="header-section-number">3.2.3</span> Line plot - Emissions and Gain score over time for China/India</a></li>
+  <li><a href="#heat-map---gain-index-for-g20-countries" id="toc-heat-map---gain-index-for-g20-countries" class="nav-link" data-scroll-target="#heat-map---gain-index-for-g20-countries"><span class="header-section-number">3.2.4</span> Heat map - Gain index for G20 countries</a></li>
+  <li><a href="#line-plot---population-and-labor-force-chinaindia" id="toc-line-plot---population-and-labor-force-chinaindia" class="nav-link" data-scroll-target="#line-plot---population-and-labor-force-chinaindia"><span class="header-section-number">3.2.5</span> Line plot - Population and labor force China/India</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -379,6 +387,8 @@ The following object is masked from 'package:viridis':
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>GDP_growth <span class="ot">=</span> GDP_growth <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Country =</span> <span class="st">"Country.Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="dot-plot-with-smoother--gdp-per-capita" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="dot-plot-with-smoother--gdp-per-capita"><span class="header-section-number">3.1.1</span> Dot Plot with Smoother- GDP per Capita</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -399,7 +409,10 @@ The following object is masked from 'package:viridis':
 <p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
-<p>Gross domestic product (GDP) per capita is a metric that describes a country’s economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since 2000 China’s has skyrocketed compared to India’s. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India’s GDP per Capita to surpass China’s.</p>
+<p>Gross domestic product (GDP) per capita is a metric that describes a country’s economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China’s GDP per capita has skyrocketed compared to India’s. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India’s GDP per Capita to surpass China’s. Both countries seem to be at an upward trajectory, but it remains to be seen if China’s growth will stagnate while India continues their increasing trend of GDP per capita growth.</p>
+</section>
+<section id="heatmap---gdp-growth" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="heatmap---gdp-growth"><span class="header-section-number">3.1.2</span> Heatmap - GDP Growth %</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -420,11 +433,10 @@ The following object is masked from 'package:viridis':
 <p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
-<p>We use the United States’ GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country.</p>
-<section id="what-is-the-reasoning-for-these-differences" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.1</span> What is the reasoning for these differences?</h3>
-<p>Parallel coordinates</p>
-<p>2 way bar chart with exports going one direction and imports going the other direction</p>
+<p>We use the United States’ GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country. When comparing China and India’s GDP growth percentage, we see that both countries have a general trend of increasing GDP growth%, but in the early 2000’s China has been growing faster from the darker spots on the plot. However, post 2010, India’s GDP growth percentage has been increasing more than both China and the US; there is an exception for the year 2019 where both India and the United States had a decrease in GDP growth and China’s was stagnant. This is also the year that COVID-19 became a global pandemic, so it makes sense that GDP growth was negative for most of the world including even the strongest economies. Despite the emergence of COVID and its negative impact on economies over the world, both China and India managed to recover and even regain its upward trend in 2020 and 2021. Hence, both China and India display the characteristics of a strong economy that are resilient to sudden recessions or unforeseeable changes to the society.</p>
+</section>
+<section id="what-is-the-reasoning-for-these-differences" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="what-is-the-reasoning-for-these-differences"><span class="header-section-number">3.1.3</span> What is the reasoning for these differences?</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -455,6 +467,9 @@ The following object is masked from 'package:viridis':
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>pivotimportexports <span class="ot">=</span> <span class="fu">pivot_longer</span>(importexports, <span class="at">cols=</span><span class="fu">c</span>(<span class="st">"Exports"</span>,<span class="st">"Imports"</span>), <span class="at">names_to =</span> <span class="st">"type"</span>,<span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="diverging-bar-chart---imports-vs-exports" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="diverging-bar-chart---imports-vs-exports"><span class="header-section-number">3.1.4</span> Diverging Bar Chart - Imports vs Exports</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -473,13 +488,12 @@ The following object is masked from 'package:viridis':
 <p><img src="results_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In the previous plots, we have seen that China’s economy has grown much faster that India’s and in this plot we get a glimpse as to why. Exporting goods brings profits to a country which stimulates economic growth because they produce the goods for a lower price than they sell them for; countries import goods that they are unable to produce themselves. Thus, it is generally desirable for countries to export goods for profit rather than import. First, China exports many more goods and services than India does. From the plot we see that since the year 2006, China has exported over 1 trillion US dollars worth of goods and has reached about 3.7 trillion $USD in 2022. Meanwhile India has also exported many billions of US dollars worth of goods, but not to the amount that China has, and from the plot we see that ever since the year 2000 India imports more goods than they export. Thus, it makes sense that India’s rate of GDP growth has historically been less than China’s.</p>
 </section>
 </section>
-<section id="how-do-their-historical-trends-set-them-up-for-the-future" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="how-do-their-historical-trends-set-them-up-for-the-future"><span class="header-section-number">3.2</span> How do their historical trends set them up for the future?</h2>
-</section>
-<section id="why-are-china-and-india-succeptible-to-environmental-impact" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="why-are-china-and-india-succeptible-to-environmental-impact"><span class="header-section-number">3.3</span> Why are China and India Succeptible to Environmental Impact?</h2>
+<section id="why-are-china-and-india-succeptible-to-environmental-impact" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="why-are-china-and-india-succeptible-to-environmental-impact"><span class="header-section-number">3.2</span> Why are China and India Succeptible to Environmental Impact?</h2>
+<p>Next, we will explore why China and India are considered the two of the most polluted countries in the world and are thus at high risk of environmental issues like climate change and resource depletion. Reducing environmental impacts is essential for a country’s vitality because it disturbs the physical environment and the people living in it, and the entire world feels its negative effects.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -495,21 +509,25 @@ The following object is masked from 'package:viridis':
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>energy <span class="ot">=</span> energy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">coal =</span> Coal<span class="sc">/</span>Production)<span class="sc">%&gt;%</span> </span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">natural gas</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Natural Gas</span><span class="st">`</span><span class="sc">/</span>Production)<span class="sc">%&gt;%</span></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">petroleum =</span> <span class="st">`</span><span class="at">Petroleum and other liquids</span><span class="st">`</span><span class="sc">/</span>Production)<span class="sc">%&gt;%</span> </span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">renewable =</span> <span class="st">`</span><span class="at">Nuclear, renewables, and other</span><span class="st">`</span><span class="sc">/</span>Production)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clean =</span> <span class="st">`</span><span class="at">Nuclear, renewables, and other</span><span class="st">`</span><span class="sc">/</span>Production)</span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>energy<span class="sc">$</span>Year<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"X"</span>,<span class="st">""</span>,<span class="fu">as.character</span>(energy<span class="sc">$</span>Year))</span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>energy<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(energy<span class="sc">$</span>Year)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>energy <span class="ot">=</span> <span class="fu">pivot_longer</span>(energy,<span class="at">cols=</span><span class="st">'coal'</span><span class="sc">:</span><span class="st">'renewable'</span>, <span class="at">names_to =</span> <span class="st">"Energy Usage Proportions"</span>, <span class="at">values_to =</span> <span class="st">"Percentages"</span>)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>energyrecent <span class="ot">=</span> energy[energy<span class="sc">$</span>Year <span class="sc">&gt;=</span> <span class="dv">2010</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>energy <span class="ot">=</span> <span class="fu">pivot_longer</span>(energy,<span class="at">cols=</span><span class="st">'coal'</span><span class="sc">:</span><span class="st">'clean'</span>, <span class="at">names_to =</span> <span class="st">"Energy Usage Proportions"</span>, <span class="at">values_to =</span> <span class="st">"Percentages"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>energyrecent <span class="ot">=</span> energy[energy<span class="sc">$</span>Year <span class="sc">&gt;=</span> <span class="dv">2010</span>,]</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>energyrecent<span class="sc">$</span><span class="st">`</span><span class="at">Energy Usage Proportions</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.factor</span>(energyrecent<span class="sc">$</span><span class="st">`</span><span class="at">Energy Usage Proportions</span><span class="st">`</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">Fuel Type</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(energyrecent<span class="sc">$</span><span class="st">`</span><span class="at">Energy Usage Proportions</span><span class="st">`</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"coal"</span>,<span class="st">"natural gas"</span>,<span class="st">"petroleum"</span>,<span class="st">"clean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="stacked-bar-chart---energy-usage-chinaindia" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="stacked-bar-chart---energy-usage-chinaindia"><span class="header-section-number">3.2.1</span> Stacked bar chart - Energy usage China/India</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"darkred"</span>,<span class="st">"yellow"</span>,<span class="st">"tan"</span>,<span class="st">"blue"</span>)</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"darkred"</span>,<span class="st">"yellow3"</span>,<span class="st">"tan"</span>,<span class="st">"green3"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(energyrecent, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Country</span><span class="st">`</span>, <span class="at">y=</span> Percentages, <span class="at">fill =</span> <span class="st">`</span><span class="at">Energy Usage Proportions</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(energyrecent, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Country</span><span class="st">`</span>, <span class="at">y=</span> Percentages, <span class="at">fill =</span> <span class="st">`</span><span class="at">Fuel Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"fill"</span>, <span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Year)<span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Year, <span class="at">scale=</span><span class="st">"free_x"</span>)<span class="sc">+</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)<span class="sc">+</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
@@ -518,12 +536,14 @@ The following object is masked from 'package:viridis':
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1920"></p>
+<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
+<p>From the plot we see that since the year 2010, only a small fraction of both China and India’s energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy than India, but there is a promising increase of renewable energy sources in recent years. As of 2021, almost 20% of both countries’ energy production are from clean energy sources such as nuclear or renewable energy. Thus, it is promising that these two countries are increasing their reliance on clean energy production instead of coal and natural gases.</p>
+<p>https://www.epa.gov/ghgemissions/sources-greenhouse-gas-emissions</p>
 </section>
-<section id="how-do-climate-related-challenges-impact-economy" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="how-do-climate-related-challenges-impact-economy"><span class="header-section-number">3.4</span> How do Climate-related Challenges Impact Economy?</h2>
+<section id="map---global-emissions" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="map---global-emissions"><span class="header-section-number">3.2.2</span> Map - Global emissions</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -574,6 +594,9 @@ replace the existing one.</code></pre>
 <p><img src="results_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="line-plot---emissions-and-gain-score-over-time-for-chinaindia" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="line-plot---emissions-and-gain-score-over-time-for-chinaindia"><span class="header-section-number">3.2.3</span> Line plot - Emissions and Gain score over time for China/India</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -619,6 +642,9 @@ replace the existing one.</code></pre>
 <p><img src="results_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="heat-map---gain-index-for-g20-countries" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="heat-map---gain-index-for-g20-countries"><span class="header-section-number">3.2.4</span> Heat map - Gain index for G20 countries</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -629,17 +655,66 @@ replace the existing one.</code></pre>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">breaks =</span> quantiles,</span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))</span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#gain_21 %&gt;% filter(Name %in% G20) %&gt;% </span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  ggplot(aes(year, Name, fill = score_cat)) + </span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#    geom_tile(alpha = 0.95) + kv_theme() +</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + </span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  theme(plot.title = element_text(margin = margin(b = 10)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>G20 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Argentina"</span>, <span class="st">"Australia"</span>, <span class="st">"Brazil"</span>, <span class="st">"Canada"</span>, <span class="st">"China"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"India"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="st">"Indonesia"</span>, <span class="st">"Italy"</span>, <span class="st">"Japan"</span>, <span class="st">"South Korea"</span>, <span class="st">"Mexico"</span>, <span class="st">"Russia"</span>, <span class="st">"Saudi Arabia"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="st">"South Africa"</span>, <span class="st">"Türkiye"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"United States"</span>, <span class="st">"European Union (27)"</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>gain_21<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(gain_21<span class="sc">$</span>year)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>gain_21 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">%in%</span> G20) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, Name, <span class="at">fill =</span> score_cat)) <span class="sc">+</span> </span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">alpha =</span> <span class="fl">0.95</span>) <span class="sc">+</span> <span class="fu">kv_theme</span>() <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">'#ffffd4'</span>,<span class="st">'#fe9929'</span>,<span class="st">'#993404'</span>)) <span class="sc">+</span> </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(gain_21<span class="sc">$</span>year), <span class="fu">max</span>(gain_21<span class="sc">$</span>year), <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span>   </span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"ND-Gain index scores over time - G20 countries"</span>) <span class="sc">+</span>  </span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
-<pre><code>Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita</code></pre>
-<p>Bar chart with imports going i</p>
+</div>
+</section>
+<section id="line-plot---population-and-labor-force-chinaindia" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="line-plot---population-and-labor-force-chinaindia"><span class="header-section-number">3.2.5</span> Line plot - Population and labor force China/India</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Population.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>LF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"LaborForce.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(pop, <span class="at">cols=</span><span class="st">'1960'</span><span class="sc">:</span><span class="st">'2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"population"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>LF <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(LF, <span class="at">cols=</span><span class="st">'1960'</span><span class="sc">:</span><span class="st">'2022'</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"labor_force"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>pop<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(pop<span class="sc">$</span>year)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>LF<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(LF<span class="sc">$</span>year)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#popLF &lt;- merge(pop, LF, by = c("year", "Country"))</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>pop_plot <span class="ot">&lt;-</span> pop <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"India"</span>, <span class="st">"China"</span>)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> population, <span class="at">color =</span> Country), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> custom_colors) <span class="sc">+</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># color = "black", size = 11, alpha = 0.3, shape = 1) +</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"Total population"</span>) <span class="sc">+</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>()) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>() <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>LF_plot <span class="ot">&lt;-</span> LF <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"India"</span>, <span class="st">"China"</span>) <span class="sc">&amp;</span> year <span class="sc">&gt;=</span> <span class="dv">1990</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> labor_force, <span class="at">color =</span> Country), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> custom_colors) <span class="sc">+</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># color = "black", size = 11, alpha = 0.3, shape = 1) +</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"Labor force"</span>) <span class="sc">+</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>()) <span class="sc">+</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kv_theme</span>()</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(pop_plot, LF_plot, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="st">"Population versus labor force over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

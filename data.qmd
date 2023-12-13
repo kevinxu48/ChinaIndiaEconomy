@@ -14,7 +14,7 @@ Next, we want to understand what role technology development and access plays in
 
 Moreover, we gathered data describing housing prices in various countries: https://data.oecd.org/price/housing-prices.htm. Monthly data from the OECD website are generally two to three months behind the current date and for most annual publications, the most recent data will be from at least one year before the date of publication. One issue with this data is that the data from China only starts from 2010-2022 and the data from India only starts from 2009-2022, but we would like both of these to contain data from previous decades. This data provides important implications on the standard of living available to residents of each country, and how individuals are faring within their macroeconomic environments.
 
-After the checkpoint, we added an additional datasource obtained from the US Energy Information Administration which is a government website. The data describes the energy usage of China and India from 1980-2021 and can be downloaded as a csv. To access the information we removed rows that contained redundant information and pivoted the data to tidy format. This is updated daily last accessed on 2023/12/12.
+After the checkpoint, we added an additional data source obtained from the US Energy Information Administration which is a government website. The data describes the energy usage of China and India from 1980-2021 and can be downloaded as a csv. To access the information we removed rows that contained redundant information and pivoted the data to tidy format. This is updated daily last accessed on 2023/12/12. https://www.eia.gov/international/overview/country/IND 
 
 ### Research Plan
 

@@ -182,7 +182,6 @@ ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
   ggtitle("China has Significantly Higher Amounts Imported and Exported")+ 
   theme(plot.title = element_text(hjust = 0.5))
 ```
-## How do their historical trends set them up for the future?
 
 ## Why are China and India Succeptible to Environmental Impact?
 
@@ -206,6 +205,7 @@ energy = pivot_longer(energy,cols='coal':'renewable', names_to = "Energy Usage P
 energyrecent = energy[energy$Year >= 2010,]
 ```
 
+## Stacked bar chart - Energy usage China/India
 ```{r,fig.height=15,fig.width=20}
 colors = c("darkred","yellow","tan","blue")
 
@@ -221,7 +221,7 @@ ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = `Energy Usage Pro
 
 ```
 
-## How do Climate-related Challenges Impact Economy?
+## Map - Global emissions
 
 ```{r}
 ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
@@ -256,6 +256,7 @@ global_emit
 
 ```
 
+## Line plot - Emissions and Gain score over time for China/India  
 ```{r}
 gain <- read.csv("gain.csv", header = TRUE, check.names = FALSE)
 ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
@@ -290,6 +291,7 @@ merge1 %>% group_by(Country, variable) %>%
   labs(x = "", y = "", title = "GHG emissions versus ND-Gain score over time")
 ```
 
+## Heat map - Gain index for G20 countries 
 ```{r}
 gain_21 <- gain %>% filter(year >= 1995) %>% na.omit()
 
@@ -298,16 +300,53 @@ gain_21$score_cat <- cut(gain_21$score,
                          breaks = quantiles,
                          labels = c("Low", "Medium", "High"))
 
-#gain_21 %>% filter(Name %in% G20) %>% 
-#  ggplot(aes(year, Name, fill = score_cat)) + 
-#    geom_tile(alpha = 0.95) + kv_theme() +
-#  scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + 
-#  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  theme(plot.title = element_text(margin = margin(b = 10)))
+G20 <- c("Argentina", "Australia", "Brazil", "Canada", "China", "France", "Germany", "India",
+"Indonesia", "Italy", "Japan", "South Korea", "Mexico", "Russia", "Saudi Arabia",
+"South Africa", "Türkiye", "United Kingdom", "United States", "European Union (27)")
+
+gain_21 %>% filter(Name %in% G20) %>% 
+  ggplot(aes(year, Name, fill = score_cat)) + 
+    geom_tile(alpha = 0.95) + kv_theme() +
+  scale_fill_manual(values=c('#ffffd4','#fe9929','#993404')) + 
+  scale_x_continuous(breaks = seq(min(gain_21$year), max(gain_21$year), by = 2)) +   
+  labs(x = "", y = "", title = "ND-Gain index scores over time - G20 countries") +  
+  theme(plot.title = element_text(margin = margin(b = 10)))
 
 
 ```
 
-    Maybe do a mosaic plot with 2 splits: CO2 emissions and economic policies vs GDP per capita
-    
-    
-Bar chart with imports going i
+## Line plot - Population and labor force China/India
+```{r}
+pop <- read.csv("Population.csv", header = TRUE, check.names = FALSE)
+LF <- read.csv("LaborForce.csv", header = TRUE, check.names = FALSE)
+
+pop <- pivot_longer(pop, cols='1960':'2022', names_to = "year", values_to = "population")
+LF <- pivot_longer(LF, cols='1960':'2022', names_to = "year", values_to = "labor_force")
+pop$year <- as.integer(pop$year)
+LF$year <- as.integer(LF$year)
+
+#popLF <- merge(pop, LF, by = c("year", "Country"))
+
+pop_plot <- pop %>% filter(Country %in% c("India", "China")) %>% ggplot() +
+  geom_line(aes(x = year, y = population, color = Country), linewidth = 1) +
+  scale_color_manual(values = custom_colors) +
+  #geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),
+            # color = "black", size = 11, alpha = 0.3, shape = 1) +
+  labs(x = "", y = "", title = "Total population") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme() +
+  theme(legend.position = "none")
+
+LF_plot <- LF %>% filter(Country %in% c("India", "China") & year >= 1990) %>% ggplot() +
+  geom_line(aes(x = year, y = labor_force, color = Country), linewidth = 1) +
+  scale_color_manual(values = custom_colors) +
+  #geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),
+  # color = "black", size = 11, alpha = 0.3, shape = 1) +
+  labs(x = "", y = "", title = "Labor force") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme()
+
+grid.arrange(pop_plot, LF_plot, ncol = 2, top = "Population versus labor force over time")
+
+```
+

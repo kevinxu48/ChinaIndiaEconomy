@@ -20,12 +20,90 @@ kv_theme <- function (){
   theme_minimal() %+replace%
     theme(legend.title = element_blank(),
           plot.title = element_text(
-            size = 12,
+            size = 10,
             face = 'bold',
-            hjust = 0,
-            vjust = 0))
+            hjust = 0.5,
+            vjust = 0),
+          axis.title = element_text(size = 8))
 }
+
+custom_colors <- c("China" = "red3", "India" = "green4")
 ```
+
+### Line plot - Population projections China/India
+```{r}
+pop_proj <- read.csv("pop_projections_total.csv", header = TRUE, check.names = FALSE)
+pop_proj_age <- read.csv("pop_projections_byage.csv", header = TRUE, check.names = FALSE)
+
+pop_proj_plot <- pop_proj %>% ggplot() +
+  geom_line(aes(x = Time, y = Value, color = Location), linewidth = 1) +
+  scale_color_manual(values = custom_colors) +
+  #geom_point(data = data.frame(Time = 2023, Value = 1420000000), aes(Time, Value), color = "blue", size = 11, alpha = 0.3) +
+  labs(x = "", y = "", title = "Population: historical values and projections") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme() +
+  geom_segment(aes(x = 2023, y = 1420000000, xend = 2028, yend = 1392000000), color = "darkgrey") +
+  annotate("text", x = 2030, y = 1380000000, label = "2022", color = "black", size = 3) + 
+  theme(legend.position = "none")
+pop_proj_plot 
+```
+
+One of the biggest points of discussion surrounding India's potential growth trajectory over China is its population growth. We used United Nations data to observe the population outlook for our two countries of interest. First we note that India began to overtake China's population in 2022, and is projected to clearly and consistently rise above China's population for at least 77 years. The population argument as it relates to economic growth essentially comes down to the idea that larger populations drive greater production and consumption, which in turn drives a larger economy. While this may be the case (and economic theory generally backs this up in the long run), there are other complexities that a larger population may introduce, such as more damaging environmental demands, which could possibly counteract some of the potential growth. We will explore this idea later in this section. 
+
+```{r}
+LF <- read.csv("LaborForce.csv", header = TRUE, check.names = FALSE)
+LF <- pivot_longer(LF, cols='1960':'2022', names_to = "year", values_to = "labor_force")
+LF$year <- as.integer(LF$year)
+
+LF_plot <- LF %>% filter(Country %in% c("India", "China") & year >= 1990) %>% ggplot() +
+  geom_line(aes(x = year, y = labor_force, color = Country), linewidth = 1) +
+  scale_color_manual(values = custom_colors) +
+  #geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),
+  # color = "black", size = 11, alpha = 0.3, shape = 1) +
+  labs(x = "", y = "", title = "Labor force") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme() 
+LF_plot
+```
+
+While India's population is almost certain to outpace China's, we wanted to look deeper into how this relates to their economies. To do so we examined how each country's labor force has changed over time using data from the World Bank. A labor force is defined as people aged 15 and older who are either currently employed or actively looking for work (essentially the "willing and able" working population of a country). This reveals a stark result: China's labor force is significantly higher than India's, and has been so for the past three decades. Because of the size and persistence of the gap, the simple population argument is brought under scrutiny. While India's population may grow much faster, it is unclear how this will translate into a population that is actively contributing to growth by working. 
+
+```{r}
+GDP_values = read.csv("GDP_values.csv")
+GDP_vals = GDP_values[((GDP_values$`Country.Name` == 'China')| (GDP_values$`Country.Name` == 'India')), ]
+L = pivot_longer(GDP_vals,cols='X1960':'X2022', names_to = "year", values_to = "GDP per Cap")
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+
+GDP_vals = L[c("Country.Name", "Indicator.Name", "year", "GDP per Cap")]
+GDP_vals = GDP_vals %>% rename(Country = `Country.Name`)
+
+GDP_growth = read.csv("GDP.csv")
+GDP_growth = GDP_growth[((GDP_growth$`Country.Name` == 'China')| (GDP_growth$`Country.Name` == 'India')) |  (GDP_growth$`Country.Name` == 'United States'), ]
+L = pivot_longer(GDP_growth,cols='X1961':'X2022', names_to = "year", values_to = "GDP Growth %")
+
+L$year<-gsub("X","",as.character(L$year))
+L$year <- as.integer(L$year)
+
+GDP_growth = L[c("Country.Name", "Indicator.Name", "year", "GDP Growth %")]
+GDP_growth = GDP_growth %>% rename(Country = "Country.Name")
+```
+
+### Dot Plot with Smoother- GDP per Capita  
+```{r,fig.width=15}
+ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
+  geom_point(color = "Black", size = 2.5) +
+  stat_smooth(method = "loess", se = FALSE, span = 0.5)+
+  facet_wrap(Country~.)+
+  ylab("GDP Per Capita (US$)")+
+  xlab("Year")+ 
+  ggtitle("Historically China has Significantly Higher GDP Per Capita")+ 
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme() +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+```
+Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account population size, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with a fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China's GDP per capita has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's. Both countries seem to be at an upward trajectory, but it remains to be seen if China's growth will stagnate while India continues their increasing trend of GDP per capita growth.
 
 ```{r}
 inflation <- read.csv("inflation.csv", header = TRUE, check.names = FALSE)
@@ -65,15 +143,15 @@ yoy_comp <- pivot_longer(yoy_comp, cols='GDP':'Unemployment Rate', names_to = "i
 
 yoyc_China <- yoy_comp %>% filter(year >= 2019 & Country == "China") %>%
   ggplot() +
-  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge") +
-  scale_fill_brewer(palette = "YlOrRd") + 
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 0.9) +
+  scale_fill_brewer(palette = "Reds", direction = -1) + 
   kv_theme() + 
   labs(x = "", y = "(%)", title = "China")
 
 yoyc_India <- yoy_comp %>% filter(year >= 2019 & Country == "India") %>%
   ggplot() +
-  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge") +
-  scale_fill_brewer(palette = "YlGn") + 
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 0.9) +
+  scale_fill_brewer(palette = "Greens", direction = -1) + 
   kv_theme() + 
   labs(x = "", y = "(%)", title = "India")
 
@@ -82,43 +160,7 @@ grid.arrange(yoyc_China, yoyc_India, top = "Year over year changes in key econom
 ```
 
 ## How have China and India's growth stories differed?
-```{r}
 
-
-GDP_values = read.csv("GDP_values.csv")
-GDP_vals = GDP_values[((GDP_values$`Country.Name` == 'China')| (GDP_values$`Country.Name` == 'India')), ]
-L = pivot_longer(GDP_vals,cols='X1960':'X2022', names_to = "year", values_to = "GDP per Cap")
-L$year<-gsub("X","",as.character(L$year))
-L$year <- as.integer(L$year)
-
-
-GDP_vals = L[c("Country.Name", "Indicator.Name", "year", "GDP per Cap")]
-GDP_vals = GDP_vals %>% rename(Country = `Country.Name`)
-
-GDP_growth = read.csv("GDP.csv")
-GDP_growth = GDP_growth[((GDP_growth$`Country.Name` == 'China')| (GDP_growth$`Country.Name` == 'India')) |  (GDP_growth$`Country.Name` == 'United States'), ]
-L = pivot_longer(GDP_growth,cols='X1961':'X2022', names_to = "year", values_to = "GDP Growth %")
-
-L$year<-gsub("X","",as.character(L$year))
-L$year <- as.integer(L$year)
-
-GDP_growth = L[c("Country.Name", "Indicator.Name", "year", "GDP Growth %")]
-GDP_growth = GDP_growth %>% rename(Country = "Country.Name")
-```
-
-### Dot Plot with Smoother- GDP per Capita  
-```{r,fig.width=15}
-ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
-  geom_point(color = "Black") +
-  stat_smooth(method = "loess", se = FALSE, span = 0.5)+
-  facet_wrap(Country~.)+
-  ylab("GDP Per Capita (US$)")+
-  xlab("Year")+ 
-  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
-  ggtitle("Historically China has Significantly Higher GDP Per Capita")+ 
-  theme(plot.title = element_text(hjust = 0.5))
-```
-Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account because it takes population size into account, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China's GDP per capita has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's. Both countries seem to be at an upward trajectory, but it remains to be seen if China's growth will stagnate while India continues their increasing trend of GDP per capita growth.
 
 
 ### Heatmap - GDP Growth %
@@ -134,6 +176,7 @@ ggplot(GDP_growth, aes(year,Country, fill = `GDP Growth %`)) +
     high = muted("green"),
     midpoint = 0
   )+
+  labs(x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 We use the United States' GDP growth as a benchmark for comparison because it is considered the largest economy in the world because it has the highest nominal GDP out of any country. When comparing China and India's GDP growth percentage, we see that both countries have a general trend of increasing GDP growth%, but in the early 2000's China has been growing faster from the darker spots on the plot. However, post 2010, India's GDP growth percentage has been increasing more than both China and the US; there is an exception for the year 2019 where both India and the United States had a decrease in GDP growth and China's was stagnant. This is also the year that COVID-19 became a global pandemic, so it makes sense that GDP growth was negative for most of the world including even the strongest economies. Despite the emergence of COVID and its negative impact on economies over the world, both China and India managed to recover and even regain its upward trend in 2020 and 2021. Hence, both China and India display the characteristics of a strong economy that are resilient to sudden recessions or unforeseeable changes to the society.
@@ -177,10 +220,12 @@ ggplot(pivotimportexports,aes(x=year,y=value,fill=type))+
     ylab("Amount spent on Imports/Exports (Billion $USD)")+
     facet_wrap(Country~.,scales="free_y")+
   coord_flip()+ 
-  scale_fill_manual(values = c("seagreen3", "red3"))+
+  scale_fill_manual(values = c("blue4", "orange2"))+
   theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
-  ggtitle("China has Significantly Higher Amounts Imported and Exported")+ 
-  theme(plot.title = element_text(hjust = 0.5))
+  ggtitle("China has Significantly Higher Amounts Imported and Exported")+
+  labs(x = "") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  kv_theme()
 ```
 In the previous plots, we have seen that China's economy has grown much faster that India's and in this plot we get a glimpse as to why. Exporting goods brings profits to a country which stimulates economic growth because they produce the goods for a lower price than they sell them for; countries import goods that they are unable to produce themselves. Thus, it is generally desirable for countries to export goods for profit rather than import. First, China exports many more goods and services than India does. From the plot we see that since the year 2006, China has exported over 1 trillion US dollars worth of goods and has reached about 3.7 trillion $USD in 2022. Meanwhile India has also exported many billions of US dollars worth of goods, but not to the amount that China has, and from the plot we see that ever since the year 2000 India imports more goods than they export. Thus, it makes sense that India's rate of GDP growth has historically been less than China's. 
 
@@ -218,14 +263,14 @@ energyrecent$`Energy Usage Proportions` = as.factor(energyrecent$`Energy Usage P
 colors = c("darkred","yellow3","tan","green3")
 
 ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = `Fuel Type`)) +
-  geom_bar(position="fill", stat="identity")+
+  geom_bar(position="fill", stat="identity", width = 0.6)+
   facet_wrap(~Year, scale="free_x")+
   scale_fill_manual(values = colors) +
-  theme(legend.position = "bottom")+
-  theme_minimal()+
-   theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
+  kv_theme() + 
+  #theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 80, vjust=0.5))+
   ggtitle("Renewable Energy Usage has not Significantly Increased for Either Country")+ 
-  theme(plot.title = element_text(hjust = 0.5))
+  labs(x = "", y = "")
 
 ```
 From the plot we see that since the year 2010, only a small fraction of both China and India's energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy than India, but there is a promising increase of renewable energy sources in recent years. As of 2021, almost 20% of both countries' energy production are from clean energy sources such as nuclear or renewable energy.  Thus, it is promising that these two countries are increasing their reliance on clean energy production instead of coal and natural gases. 
@@ -288,7 +333,6 @@ ghg_CI$Country <- as.factor(ghg_CI$Country)
 ghg_CI$year <- as.integer(ghg_CI$year)
 ghg_CI <- ghg_CI %>% group_by(Country)
 
-custom_colors <- c("China" = "red", "India" = "green4")
 merge1 <- merge(ghg_CI, gain_CI, by = c("year", "Country")) %>%
   select(year, Country, emissions, score) %>% 
   mutate(score = scale(score), emissions = scale(emissions))
@@ -325,38 +369,4 @@ gain_21 %>% filter(Name %in% G20) %>%
 
 ```
 
-### Line plot - Population and labor force China/India
-```{r}
-pop <- read.csv("Population.csv", header = TRUE, check.names = FALSE)
-LF <- read.csv("LaborForce.csv", header = TRUE, check.names = FALSE)
-
-pop <- pivot_longer(pop, cols='1960':'2022', names_to = "year", values_to = "population")
-LF <- pivot_longer(LF, cols='1960':'2022', names_to = "year", values_to = "labor_force")
-pop$year <- as.integer(pop$year)
-LF$year <- as.integer(LF$year)
-
-#popLF <- merge(pop, LF, by = c("year", "Country"))
-
-pop_plot <- pop %>% filter(Country %in% c("India", "China")) %>% ggplot() +
-  geom_line(aes(x = year, y = population, color = Country), linewidth = 1) +
-  scale_color_manual(values = custom_colors) +
-  #geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),
-            # color = "black", size = 11, alpha = 0.3, shape = 1) +
-  labs(x = "", y = "", title = "Total population") +
-  scale_y_continuous(labels = scales::label_comma()) +
-  kv_theme() +
-  theme(legend.position = "none")
-
-LF_plot <- LF %>% filter(Country %in% c("India", "China") & year >= 1990) %>% ggplot() +
-  geom_line(aes(x = year, y = labor_force, color = Country), linewidth = 1) +
-  scale_color_manual(values = custom_colors) +
-  #geom_point(data = data.frame(year = 2021, population = 1400000000), aes(year, population),
-  # color = "black", size = 11, alpha = 0.3, shape = 1) +
-  labs(x = "", y = "", title = "Labor force") +
-  scale_y_continuous(labels = scales::label_comma()) +
-  kv_theme()
-
-grid.arrange(pop_plot, LF_plot, ncol = 2, top = "Population versus labor force over time")
-
-```
 

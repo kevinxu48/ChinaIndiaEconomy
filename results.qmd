@@ -48,7 +48,7 @@ pop_proj_plot <- pop_proj %>% ggplot() +
 pop_proj_plot 
 ```
 
-One of the biggest points of discussion surrounding India's potential growth trajectory over China is its population growth. We used United Nations data to observe the population outlook for our two countries of interest. First we note that India began to overtake China's population in 2022, and is projected to clearly and consistently rise above China's population for at least 77 years. The population argument as it relates to economic growth essentially comes down to the idea that larger populations drive greater production and consumption, which in turn drives a larger economy. While this may be the case (and economic theory generally backs this up in the long run), there are other complexities that a larger population may introduce, such as more damaging environmental demands, which could possibly counteract some of the potential growth. We will explore this idea later in this section. 
+One of the biggest points of discussion surrounding India's potential growth trajectory over China is its population growth. We used United Nations data to observe the population outlook for our two countries of interest. First we note that India began to overtake China's population in 2022, and is projected to clearly and consistently rise above China for at least 77 years. The population argument as it relates to economic growth essentially comes down to the idea that larger populations drive greater production and consumption, which in turn drives a larger economy. While this may be the case (and economic theory generally backs this up in the long run), there are other complexities that a larger population may introduce, such as more damaging environmental demands, which could possibly counteract some of the potential growth. We will explore this idea later in this section. 
 
 ```{r}
 LF <- read.csv("LaborForce.csv", header = TRUE, check.names = FALSE)
@@ -66,7 +66,7 @@ LF_plot <- LF %>% filter(Country %in% c("India", "China") & year >= 1990) %>% gg
 LF_plot
 ```
 
-While India's population is almost certain to outpace China's, we wanted to look deeper into how this relates to their economies. To do so we examined how each country's labor force has changed over time using data from the World Bank. A labor force is defined as people aged 15 and older who are either currently employed or actively looking for work (essentially the "willing and able" working population of a country). This reveals a stark result: China's labor force is significantly higher than India's, and has been so for the past three decades. Because of the size and persistence of the gap, the simple population argument is brought under scrutiny. While India's population may grow much faster, it is unclear how this will translate into a population that is actively contributing to growth by working. 
+While India's population is almost certain to outpace China's, we wanted to look deeper into how this relates to their economies. To do so we examined how each country's labor force has changed over time using data from the World Bank. A labor force is defined as people aged 15 and older who are either currently employed or actively looking for work (essentially the "willing and able" working population of a country). This reveals a stark result: China's labor force is significantly higher than India's, and has been so for the past three decades. Because of the size and persistence of the gap, the simple population argument is brought under scrutiny. While India's population may grow much faster, it is unclear how this will translate into a population that is actively contributing to economic growth by working. 
 
 ```{r}
 GDP_values = read.csv("GDP_values.csv")
@@ -103,7 +103,7 @@ ggplot(GDP_vals, aes(year,`GDP per Cap`)) +
   kv_theme() +
   theme(plot.title = element_text(hjust = 0.5, size = 12))
 ```
-Gross domestic product (GDP) per capita is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account population size, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with a fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China's GDP per capita has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's. Both countries seem to be at an upward trajectory, but it remains to be seen if China's growth will stagnate while India continues their increasing trend of GDP per capita growth.
+Next we consider China and India's economic sizes by examining Gross domestic product (GDP) per capita. This is a metric that describes a country's economic output per person, so a high value indicates a stronger economy; GDP per capita is also a better measure for comparing overall economy than nominal GDP because it takes into account population size, which is especially important for China and India because they are the two most populous countries in the world. From this scatterplot with a fitted line, we see that while both China and India have had growing GDP per capita levels since 1960, since the year 2000 China's GDP per capita has skyrocketed compared to India's. As of 2020, the difference between their GDP per Capita is over $10000. When looking at GDP growth without considering other factors, it appears that if current trends continue, it will take many years for India's GDP per Capita to surpass China's. Both countries seem to be at an upward trajectory, but it remains to be seen if China's growth will stagnate while India continues their increasing trend of GDP per capita growth.
 
 ```{r}
 inflation <- read.csv("inflation.csv", header = TRUE, check.names = FALSE)
@@ -143,17 +143,25 @@ yoy_comp <- pivot_longer(yoy_comp, cols='GDP':'Unemployment Rate', names_to = "i
 
 yoyc_China <- yoy_comp %>% filter(year >= 2019 & Country == "China") %>%
   ggplot() +
-  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 0.9) +
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 1) +
   scale_fill_brewer(palette = "Reds", direction = -1) + 
+  geom_vline(xintercept = 2019.5, color = "grey", size = 0.5) +
+  geom_vline(xintercept = 2020.5, color = "grey", size = 0.5) +
+  geom_vline(xintercept = 2021.5, color = "grey", size = 0.5) +
   kv_theme() + 
-  labs(x = "", y = "(%)", title = "China")
+  labs(x = "", y = "(%)", title = "China") +
+  theme(plot.title = element_text(margin = margin(b = 12)))
 
 yoyc_India <- yoy_comp %>% filter(year >= 2019 & Country == "India") %>%
   ggplot() +
-  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 0.9) +
+  geom_col(aes(x = year, y = value, fill = indicator), position = "dodge", width = 1) +
   scale_fill_brewer(palette = "Greens", direction = -1) + 
+  geom_vline(xintercept = 2019.5, color = "grey", size = 0.5) +
+  geom_vline(xintercept = 2020.5, color = "grey", size = 0.5) +
+  geom_vline(xintercept = 2021.5, color = "grey", size = 0.5) +
   kv_theme() + 
-  labs(x = "", y = "(%)", title = "India")
+  labs(x = "", y = "(%)", title = "India") +
+  theme(plot.title = element_text(margin = margin(b = 12)))
 
 grid.arrange(yoyc_China, yoyc_India, top = "Year over year changes in key economic indicators")
 

@@ -232,13 +232,46 @@ yoyc_India <- yoy_comp %>% filter(year >= 2016 & Country == "India") %>%
 
 grid.arrange(yoyc_China, yoyc_India, top = "Year over year changes in key economic indicators")
 ```
-While GDP provides a representative and accurate conception of an economy in the big picture, it can mask other factors that are relevant to economic health and growth. To remedy this we considered unemployment rate and inflation, two key economic indicators. A country's unemployment rate simply reflects the proportion of the labor force that cannot find work, and inflation reflects an overall change in prices across an economy over a period of time (annually here). The result of positive inflation (price increases) is a decrease in purchasing power, where each unit of currency buys fewer goods and services. 
+While GDP provides a representative and accurate conception of an economy in the big picture, we wanted to explore additional factors that are relevant to economic health and growth. We transformed data from the World Bank to obtain the year-to-year change in GDP, inflation, and unemployment rate of both countries. A country's unemployment rate simply reflects the proportion of the labor force that cannot find work, and inflation reflects an overall change in prices across an economy over a period of time (annually here). The result of positive inflation (price increases) is a decrease in purchasing power, where each unit of currency buys fewer goods and services.In the plot above, a bar growing below 0 can *generally* be viewed as a positive outcome for inflation and unemployment^[This is not strictly true in all cases, but this intuitive understanding is sufficient for the scope of our project.], as it indicates that prices have decreased or more people are able to find work (and therefore earn income to purchase goods/services) relative to the previous year. On the other hand, a bar growing above 0 can be viewed as a positive outcome for GDP, as it signifies that the country's economic output has grown since the previous year. In this hypothetical scope, if we saw inflation and unemployment growing downward, while GDP grew upward, the country would be experiencing the "maximum positive" outcome (i.e. low prices, higher consumption, greater output)^[Again, this is a loose explanation of the relationship to avoid a technical economics discussion.].
 
-We transformed data from the World Bank to obtain the year-to-year change in GDP, inflation, and unemployment rate for both countries. 
-
+We first observe from the plot that all three indicators do not always change in the strictly "maximizing" or "minimizing" way. Instead, these factors seem to mitigate each other, and prevent unconstrained growth/collapse. For example, in years where GDP rises, inflation growth mitigates the overall economic growth (e.g. 2018 for China and India). We also observe that inflation seems to have the greatest fluctuation year-to-year relative to the other indicators. This suggests that a more detailed look into prices and purchasing power may tell a different story of how individuals fare in each country's economy compared the the overall macroeconomic picture. For instance for the most recent data available (2022), China's inflation rate has grown nearly 100% while India's has grown only around 35%. Additionally, India has experienced a decrease in unemployment whereas China faced the opposite in the same year. This suggests that though both countries experienced GDP growth, perhaps the microeconomic landscape of India or China will account for the overall growth differential in the years to come. 
 
 ## Why are China and India Succeptible to Environmental Impact?
-Next, we will explore why China and India are considered the two of the most polluted countries in the world and are thus at high risk of environmental issues like climate change and resource depletion. Reducing environmental impacts is essential for a country's vitality because it disturbs the physical environment and the people living in it, and the entire world feels its negative effects. 
+
+Given the emerging environmental crisis of the world, it is perhaps irrelevant to discuss economic growth in the long-run without considering a country's resilience to climate-related disasters. This is particularly the case when China and India rank high in the world order of total emissions. As we can see in the map below, China is the top contributor to global emissions, and India trails behind the US as the third highest. Environmental impacts can cause significant shock to a country's economy (e.g. decreased access to fuel/electricity due to resource depletion or productivity loss due to physical landscape damage).
+
+```{r}
+ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
+ghg$`1990` <- as.numeric(ghg$`1990`)
+ghg$Country <- as.factor(ghg$Country)
+ghg <- pivot_longer(ghg, cols='2020':'1990', names_to = "year", values_to = "emissions")
+world <- map_data("world") %>% filter(! long > 180)
+world <- world %>% rename(Country = region) %>% mutate(Country = factor(Country))
+diff <- setdiff(world$Country, ghg$Country)
+
+world <- world %>% mutate(Country = recode(str_trim(Country),
+                                          "USA" = "United States", "UK" = "United Kingdom",
+                                          "Turkey" = "Türkiye", "Trinidad" = "Trinidad and Tobago"))
+ghg_2019 <- ghg %>% filter(year == 2019)
+world_ghg <- inner_join(world, ghg_2019, by = "Country")
+
+global_emit <- ggplot(data = world_ghg, mapping = aes(x = long, y = lat, group = group)) +
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = emissions)) +
+  scale_fill_viridis() +
+  ggtitle("Global greenhouse gas emissions in 2019 (metric tons)") +
+  kv_theme() +
+  theme(axis.text = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        panel.border = element_blank(),
+        panel.grid = element_blank(),
+        axis.title = element_blank(),
+        plot.title = element_text(margin = margin(b = 20))) +
+  coord_map("moll")
+global_emit
+
+```
 
 ```{r}
 # units of (quad Btu)
@@ -281,44 +314,12 @@ ggplot(energyrecent, aes(x = `Country`, y= Percentages, fill = `Fuel Type`)) +
   labs(x = "", y = "")
 
 ```
-From the plot we see that since the year 2010, only a small fraction of both China and India's energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy than India, but there is a promising increase of renewable energy sources in recent years. As of 2021, almost 20% of both countries' energy production are from clean energy sources such as nuclear or renewable energy.  Thus, it is promising that these two countries are increasing their reliance on clean energy production instead of coal and natural gases. 
+From the plot we see that since the year 2010, only a small fraction of both China and India's energy production comes from clean energy sources such as nuclear energy and renewable sources like solar and wind energy. Moreover, both countries rely on coal as their primary energy source which according to the EPA and other environmental organizations is the biggest emitter of greenhouse gasses along with natural gasses. China has higher levels of coal usage and lower amounts of renewable energy than India, but there is a promising increase of renewable energy sources in recent years. As of 2021, almost 20% of both countries' energy production are from clean energy sources such as nuclear or renewable energy.  Thus, it is promising that these two countries are increasing their reliance on clean energy production instead of coal and natural gases. However, as the population of both countries grow (particularly India's) it is inevitable that energy demands will significantly increase, and it remains to be seen if renewable energy sources can keep up. 
 
 https://www.epa.gov/ghgemissions/sources-greenhouse-gas-emissions 
 
 ### Map - Global emissions
 
-```{r}
-ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
-ghg$`1990` <- as.numeric(ghg$`1990`)
-ghg$Country <- as.factor(ghg$Country)
-ghg <- pivot_longer(ghg, cols='2020':'1990', names_to = "year", values_to = "emissions")
-world <- map_data("world") %>% filter(! long > 180)
-world <- world %>% rename(Country = region) %>% mutate(Country = factor(Country))
-diff <- setdiff(world$Country, ghg$Country)
-
-world <- world %>% mutate(Country = recode(str_trim(Country),
-                                          "USA" = "United States", "UK" = "United Kingdom",
-                                          "Turkey" = "Türkiye", "Trinidad" = "Trinidad and Tobago"))
-ghg_2019 <- ghg %>% filter(year == 2019)
-world_ghg <- inner_join(world, ghg_2019, by = "Country")
-
-global_emit <- ggplot(data = world_ghg, mapping = aes(x = long, y = lat, group = group)) +
-  coord_fixed(1.3) +
-  geom_polygon(aes(fill = emissions)) +
-  scale_fill_viridis() +
-  ggtitle("Global greenhouse gas emissions in 2019 (metric tons)") +
-  kv_theme() +
-  theme(axis.text = element_blank(),
-        axis.line = element_blank(),
-        axis.ticks = element_blank(),
-        panel.border = element_blank(),
-        panel.grid = element_blank(),
-        axis.title = element_blank(),
-        plot.title = element_text(margin = margin(b = 20))) +
-  coord_map("moll")
-global_emit
-
-```
 
 ### Line plot - Emissions and Gain score over time for China/India  
 ```{r}

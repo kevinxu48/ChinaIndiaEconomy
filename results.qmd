@@ -40,8 +40,7 @@ pop_proj_plot <- pop_proj %>% ggplot() +
   scale_y_continuous(labels = scales::label_comma()) +
   kv_theme() +
   geom_segment(aes(x = 2023, y = 1420000000, xend = 2028, yend = 1392000000), color = "darkgrey") +
-  annotate("text", x = 2030, y = 1380000000, label = "2022", color = "black", size = 3) + 
-  theme(legend.position = "none")
+  annotate("text", x = 2030, y = 1380000000, label = "2022", color = "black", size = 3) 
 pop_proj_plot 
 ```
 

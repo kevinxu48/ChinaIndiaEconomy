@@ -264,6 +264,7 @@ global_emit
 ```
 ```{r}
 gain <- read.csv("gain.csv", header = TRUE, check.names = FALSE)
+gain <- pivot_longer(gain,cols='1995':'2021', names_to = "year", values_to = "score")
 gain_21 <- gain %>% filter(year >= 1995) %>% na.omit()
 
 quantiles <- quantile(gain_21$score, probs = c(0, 1/3, 2/3, 1))
@@ -290,7 +291,6 @@ To unpack China and India's vulnerability to climate change, we transformed data
 ```{r}
 ghg <- read.csv("historical_emissions.csv", header = TRUE, check.names = FALSE)
 
-gain <- pivot_longer(gain,cols='1995':'2021', names_to = "year", values_to = "score")
 ghg$`1990` <- as.numeric(ghg$`1990`)
 ghg$Country <- as.factor(ghg$Country)
 ghg <- pivot_longer(ghg, cols='2020':'1990', names_to = "year", values_to = "emissions")

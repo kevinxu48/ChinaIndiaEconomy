@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,8 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -111,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -125,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Comparing Economic Growth of China and India</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/kevinxu48/EDAVFinal_Appaji_Xu.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -209,9 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We are interested in exploring several dimensions of India and China’s demographics and economic behaviors in order to inform our conception of their growth stories. Therefore, we will consider several datasets available on the World Bank database https://data.worldbank.org/?locations=CN-IN, at least as part of our preliminary exploration. All of the data available here is either gathered by the Bank’s country management units, other international organizations (e.g.&nbsp;United Nations, International Labour Organization, etc.), or obtained from the countries’ statistical offices themselves. Depending on the series, the data are either updated monthly or annually, and are in time series format. These datasets can be accessed by downloading .csv files directly from the website.</p>
 <p>Integral to our analysis will be considering key demographic and economic metrics of each country. For example, we will examine data on the countries’ per capita GDPs, population ages, population growth, and unemployment rates. This analysis will serve as a baseline assessment of trends in the two countries and how they compare. These databases were last updated on October 26, 2023 as of November 29, 2023, so we know that they contain up to date information.</p>
 <p>To dive deeper into our investigation, we plan to contextualize our understanding of India and China’s economies under the lens of a few salient sociopolitical issues. First we wish to consider how climate change is impacting both nations. To do so we will examine time series data on greenhouse gas emissions from Climate Watch, which we can download as .csv from https://www.climatewatchdata.org/ghg-emissions?end_year=2020&amp;start_year=1990. We will transform this data to understand how each country’s emissions per capita and per GDP have changed throughout the years. Additionally, we will supplement this data investigation with qualitative analysis of current trends in environmental regulations and international political discourse. This will help frame our understanding of how each countries’ economies may be changing as a result, and if one country happens to be situated better than the other. To supplement this discussion, we will also turn to times series data from the Notre Dame Global Adaptive initiative (ND-GAIN) which provides vulnerability scores based on a country’s exposure, sensitivity and capacity to adapt to the negative effects of climate change. Again, this data is times series (1995 - 2021) and directly available to download as .csv from https://gain.nd.edu/our-work/country-index/.</p>
-<p>Next, we want to understand what role technology development and access plays into these economies. As a first step we will explore how the countries compare in terms of access to electricity and internet usage (World Bank time series data). We will further consider data on technology manufacturing as historically, both countries’ economies have been colloquially associated with significant technological exports.</p>
-<p>Moreover, we gathered data describing housing prices in various countries: https://data.oecd.org/price/housing-prices.htm. Monthly data from the OECD website are generally two to three months behind the current date and for most annual publications, the most recent data will be from at least one year before the date of publication. One issue with this data is that the data from China only starts from 2010-2022 and the data from India only starts from 2009-2022, but we would like both of these to contain data from previous decades. This data provides important implications on the standard of living available to residents of each country, and how individuals are faring within their macroeconomic environments.</p>
-<p>After the checkpoint, we added an additional data source obtained from the US Energy Information Administration which is a government website. The data describes the energy usage of China and India from 1980-2021 and can be downloaded as a csv. To access the information we removed rows that contained redundant information and pivoted the data to tidy format. This is updated daily last accessed on 2023/12/12. https://www.eia.gov/international/overview/country/IND</p>
+<p>After the checkpoint, we added an additional data source obtained from the US Energy Information Administration which is a government website. The data describes the energy usage of China and India from 1980-2021 and can be downloaded as a csv. To access the information we removed rows that contained redundant information and pivoted the data to tidy format. This is updated daily last accessed on 2023/12/12. https://www.eia.gov/international/overview/country/IND. We also obtained data from the United Nations World population prospects study to observe the predicted propulation growth of India and China up to the year 2100. The study was published in 2022 and the data can be downloaded as a .csv from: https://population.un.org/wpp/. The projections we used are derived from the study’s “median variant”, which is the most-likely outcomes based on assumptions about a country’s fertility, mortality, and migration.</p>
 <section id="research-plan" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.1.1</span> Research Plan</h3>
 <p>Using these datasets, we will be able to compare factors that impact a nation’s economy to determine recent trends in China and India’s economy. Through visualizations comparing these factors faceted by the two countries, we can attempt to predict which country will have stronger economic growth in the future given recent and prior historical trends.</p>
@@ -223,7 +220,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This dataset will help explore one of the metrics, unemployment, that will help answer the question of how the two countries’ growths have differed. We will use this to create a time series plot comparing the unemployment rates of China and India from the year 1991 onward. By viewing the unemployment trend, we can determine whether China or India’s unemployment rate is on a downward trajectory, which is a good indication of a flourishing economy. Likewise, if unemployment rate has an upwards trajectory then this would be an indication of a declining economy.</p>
 <p>When downloading the csv file, we see like with the GDP data, the data contains rows going from 1960 to 2022 and the columns represent the names of different countries including China and India. From this data we will subset the countries to only look at the China and India columns and we will create time series plots to compare the unemployment rate trends in the past 3 decades.</p>
 <p>Moreover, we utilize the environmental data to answer the question of how vulnerable each country is to potential climate-related disaster through the ND-GAIN index. A higher ND-GAIN index indicates that the country has a higher capacity to adapt to the negative effects of climate change.</p>
-<p>Finally, for the housing prices index data, we will use higher values as an indicator of economic growth. In general, rising house prices encourages additional construction spending to maximize profit, leading to more robust economic growth. To access this dataset, we can download a csv from the website with a location, time period, and value column. This time, the data is already in tidy form, so we do not need to pivot longer. Again we will subset the data to examine China and India, and maybe other countries to use for comparisons. We can use a time series plot or dotplot to compare the real housing prices index for China and India as a criterion for which country has had a better growing housing market.</p>
 <p>For our datasets, missing data comes in the form of data that is missing for specific periods of time, usually for years around the 1960’s. Since we cannot extrapolate, we will simply remove the columns associated with the years that contain missing values instead of attempting to fill in the values. This is because the data from earlier time periods are not as important for answering our research questions since we are focused on China and India in contemporary time periods.</p>
 </section>
 </section>
@@ -238,10 +234,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.0.2
+✔ dplyr     1.1.3     ✔ purrr     1.0.2
 ✔ forcats   1.0.0     ✔ readr     2.1.4
-✔ ggplot2   3.4.4     ✔ stringr   1.5.1
-✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ ggplot2   3.4.3     ✔ stringr   1.5.1
+✔ lubridate 1.9.2     ✔ tibble    3.2.1
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
